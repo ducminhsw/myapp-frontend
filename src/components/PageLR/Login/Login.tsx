@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { z } from "zod";
-
+import { useNavigate } from "react-router-dom";
 const LoginSchema = z
   .object({
     username: z.string().min(1, { message: "Vui lòng nhập tên người dùng" }),
@@ -12,9 +12,16 @@ type Prop = {
   statusUser: string;
   setStatusUser: (vale: string) => void;
   handleSwapLoginandRegister: (value: string) => void;
+  handleLoginSuccess: (value: boolean) => void;
 };
 type StateLoginProp = { username: string; password: string };
-export default function Login({ statusUser, setStatusUser, handleSwapLoginandRegister }: Prop) {
+export default function Login({
+  statusUser,
+  setStatusUser,
+  handleSwapLoginandRegister,
+  handleLoginSuccess,
+}: Prop) {
+  const navigate = useNavigate();
   const [data, setData] = useState({ username: "", password: "" });
 
   const [errors, setErrors] = useState({} as StateLoginProp);
@@ -23,6 +30,8 @@ export default function Login({ statusUser, setStatusUser, handleSwapLoginandReg
     try {
       LoginSchema.parse(data);
       console.log("Đăng nhập thành công");
+      handleLoginSuccess(true);
+      navigate("/channels/me/0");
       setData({ username: "", password: "" } as StateLoginProp);
       setErrors({} as StateLoginProp);
     } catch (error) {

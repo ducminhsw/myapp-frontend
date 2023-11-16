@@ -1,15 +1,22 @@
 import { createBrowserRouter } from "react-router-dom";
 import Channels from "./screens/Channels";
 import ChatComp from "./components/chats/ChatComp";
+import App from "./App";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Channels />,
+    element: <App />,
     children: [
       {
-        path: "me",
-        element: <ChatComp />,
+        path: "/channels",
+        element: <Channels />,
+        children: [
+          {
+            path: "/channels/:idGroup/:idChannel",
+            element: <ChatComp />,
+          },
+        ],
       },
     ],
   },
@@ -17,10 +24,7 @@ export const router = createBrowserRouter([
     path: "/auth",
     element: <div>Authentication</div>,
   },
-  {
-    path: "/channels",
-    element: <div>Channels</div>,
-  },
+
   {
     path: "/friend",
     element: <div>Home</div>,
