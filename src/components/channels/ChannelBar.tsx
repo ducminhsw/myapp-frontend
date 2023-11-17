@@ -1,16 +1,26 @@
 import { SampleIC } from "../../assets/images";
+import { useParams } from "react-router-dom";
 interface ChannelBarProps {
   onClick: () => void;
+  channelBarId: string;
+  name: string;
 }
 
-const ChannelBar = ({ onClick }: ChannelBarProps) => {
+const ChannelBar = ({ onClick, channelBarId, name }: ChannelBarProps) => {
+  let { idChannel } = useParams();
+
+  let isActiveChannelBar = channelBarId == idChannel;
   return (
     <div className="hover:cursor-pointer rounded" onClick={onClick}>
-      <div className="flex items-center hover:bg-[#35373c] box-border m-2">
+      <div
+        className={`flex items-center ${
+          isActiveChannelBar ? "bg-[#44474d]" : ""
+        } hover:bg-[#44474d] rounded-md box-border m-2`}
+      >
         <div className="p-2">
           <img className="rounded-full w-5 h-5 object-cover" src={SampleIC} alt="" />
         </div>
-        <h3>RFC BKLabs</h3>
+        <h3>{name}</h3>
       </div>
     </div>
   );

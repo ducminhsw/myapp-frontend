@@ -4,11 +4,11 @@ import { SampleIC } from "../assets/images";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 let arrChanels = [
-  { channelsId: "0" },
-  { channelsId: "1" },
-  { channelsId: "2" },
-  { channelsId: "3" },
-  { channelsId: "4" },
+  { channelsId: "0", name: "Kênh trò chuyện" },
+  { channelsId: "1", name: "Kênh chat chung" },
+  { channelsId: "2", name: "Kênh học tập" },
+  { channelsId: "3", name: "English group" },
+  { channelsId: "4", name: "Video call" },
 ];
 const Channels = () => {
   const navigate = useNavigate();
@@ -28,13 +28,18 @@ const Channels = () => {
             <div className="p-2">
               <img className="rounded-full w-5 h-5 object-cover" src={SampleIC} alt="" />
             </div>
-            <h3>RFC BKLabs</h3>
+            <h3>RFC BKLdabs</h3>
           </div>
         </div>
         {arrChanels.map((item, index) => {
           return (
             <>
-              <ChannelBar key={index} onClick={() => handleClick(item.channelsId)} />
+              <ChannelBar
+                {...item}
+                channelBarId={item.channelsId}
+                key={index}
+                onClick={() => handleClick(item.channelsId)}
+              />
             </>
           );
         })}

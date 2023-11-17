@@ -28,7 +28,10 @@ let arrGroupIc = [
     channelsId: "0",
   },
 ];
-
+let Me = {
+  groupicId: "me",
+  channelsId: "0",
+};
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   const navigate = useNavigate();
@@ -45,10 +48,12 @@ function App() {
         <>
           <div className="flex h-full w-full items-centers">
             <div className="flex flex-col h-full w-20 bg-[#1e1f22] items-centers mt-[20px]">
+              <GroupIC {...Me} onClick={() => handleNavigate(Me.groupicId, Me.channelsId)} />
               {arrGroupIc.map((item, index) => {
                 return (
                   <GroupIC
                     key={index}
+                    {...item}
                     onClick={() => handleNavigate(item.groupicId, item.channelsId)}
                   />
                 );

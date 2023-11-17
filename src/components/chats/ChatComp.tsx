@@ -2,6 +2,16 @@ import Message from "./Message";
 import ContentIcon from "./icons/ContentIcon";
 import ListMemBerIcon from "./icons/ListMemBerIcon";
 
+let arr = [
+  {
+    id: "0",
+    name: "Minh",
+    dateTime: "09/07/2023 20:57",
+    content: "Xin chào cậu mình là Nguyễn Đức Minh Học Tại Bách Khoa Hà Nội",
+  },
+  { id: "0", name: "Minh", dateTime: "09/07/2023 20:57", content: "Chào cậu" },
+];
+
 const ChatComp = () => {
   return (
     <div className="h-full w-5/6">
@@ -13,12 +23,9 @@ const ChatComp = () => {
         <ListMemBerIcon />
       </div>
       <div>
-        Body
-        <Message />
-        <Message />
-        <Message />
-        <Message />
-        <Message />
+        {arr.map((item, index) => {
+          return <Message {...item} />;
+        })}
       </div>
     </div>
   );
