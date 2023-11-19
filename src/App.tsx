@@ -5,6 +5,7 @@ import { router } from "./Router";
 import GroupIC from "./components/groups/GroupIC";
 import { useState } from "react";
 import PageLR from "./components/PageLR/PageLR";
+import GroupCreate from "./components/groups/GroupCreate";
 
 let arrGroupIc = [
   {
@@ -47,7 +48,7 @@ function App() {
       {isLogin ? (
         <>
           <div className="flex h-full w-full items-centers">
-            <div className="flex flex-col h-full w-20 bg-[#1e1f22] items-centers mt-[20px]">
+            <div className="flex flex-col h-full w-20 bg-[#1e1f22] items-centers pt-[20px]">
               <GroupIC {...Me} onClick={() => handleNavigate(Me.groupicId, Me.channelsId)} />
               {arrGroupIc.map((item, index) => {
                 return (
@@ -58,6 +59,7 @@ function App() {
                   />
                 );
               })}
+              <GroupCreate />
             </div>
             <Outlet />
           </div>

@@ -2,7 +2,7 @@ import { SampleIC } from "../../assets/images";
 import { useParams } from "react-router-dom";
 interface IGroupProp {
   url?: string;
-  groupicId: string;
+  groupicId?: string;
   onClick: () => void;
 }
 const GroupIC = (props: IGroupProp) => {
