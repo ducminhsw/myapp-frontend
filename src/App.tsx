@@ -1,11 +1,12 @@
 import { Outlet, RouterProvider, useNavigate } from "react-router-dom";
-
-import "./App.css";
-import { router } from "./Router";
-import GroupIC from "./components/groups/GroupIC";
 import { useState } from "react";
+import "./App.css";
+import { useSelector, useDispatch } from "react-redux";
+import GroupIC from "./components/groups/GroupIC";
 import PageLR from "./components/PageLR/PageLR";
 import GroupCreate from "./components/groups/GroupCreate";
+import { RootState } from "./redux/store";
+import { Modal } from "antd";
 
 let arrGroupIc = [
   {
@@ -34,7 +35,7 @@ let Me = {
   channelsId: "0",
 };
 function App() {
-  const [isLogin, setIsLogin] = useState(false);
+  const isLogin = useSelector((state: RootState) => state.login.isLogin);
   const navigate = useNavigate();
   const handleNavigate = (groupicId: string, channelsId: string) => {
     console.log(groupicId);
@@ -43,9 +44,22 @@ function App() {
     navigate(newUrl, { replace: true });
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   return (
     <>
-      {isLogin ? (
+      {isLogin == true ? (
         <>
           <div className="flex h-full w-full items-centers">
             <div className="flex flex-col h-full w-20 bg-[#1e1f22] items-centers pt-[20px]">
@@ -59,13 +73,23 @@ function App() {
                   />
                 );
               })}
-              <GroupCreate />
+              <GroupCreate onClick={showModal} />
             </div>
             <Outlet />
+            <Modal
+              title="Create New Group"
+              open={isModalOpen}
+              onOk={handleOk}
+              onCancel={handleCancel}
+            >
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+            </Modal>
           </div>
         </>
       ) : (
-        <PageLR isLogin={isLogin} setIsLogin={setIsLogin} />
+        <PageLR />
       )}
     </>
   );

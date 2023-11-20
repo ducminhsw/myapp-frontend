@@ -1,11 +1,12 @@
 import { useState } from "react";
 import Login from "./Login/Login";
 import Register from "./Register/Register";
-type Props = {
-  isLogin: boolean;
-  setIsLogin: (value: boolean) => void;
-};
-export default function PageLR({ isLogin, setIsLogin }: Props) {
+import { setLogin } from "../../redux/features/login/loginSlice";
+import { useDispatch } from "react-redux";
+
+type Props = {};
+export default function PageLR({}: Props) {
+  const dispatch = useDispatch();
   const [statusUser, setStatusUser] = useState("login");
   const handleSwapLoginandRegister = (value: string) => {
     if (value === "login") {
@@ -16,11 +17,11 @@ export default function PageLR({ isLogin, setIsLogin }: Props) {
     }
   };
   const handleLogin = () => {
-    setIsLogin(!isLogin);
+    dispatch(setLogin());
   };
   return (
     <>
-      <section className=" bg-gradient-to-r pt-[60px]  from-purple-500 to-pink-500 h-[100vh]">
+      <section className=" bg-gradient-to-r pt-[60px]  from-purple-500 to-pink-500 min-h-[100vh]">
         {statusUser === "login" && (
           <Login
             statusUser={statusUser}

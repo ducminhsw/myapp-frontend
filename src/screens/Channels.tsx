@@ -18,7 +18,6 @@ const Channels = () => {
   const [isMuteHP, setIsMuteHP] = useState(false);
 
   const handleClick = (channelsId: string) => {
-    // Tạo URL mới với giá trị channelsId mới và giữ nguyên "me"
     const newUrl = `/channels/${idGroup}/${channelsId}`;
     navigate(newUrl, { replace: true });
   };
