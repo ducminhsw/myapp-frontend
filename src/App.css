@@ -3,3 +3,6 @@
   width: 100%;
   height: 100vh;
 }
+button:where(.css-dev-only-do-not-override-nllxry).ant-btn-primary{
+  background-color: #1677ff !important;
+}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { z } from "zod";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 const LoginSchema = z
   .object({
     username: z.string().min(1, { message: "Vui lòng nhập tên người dùng" }),
@@ -29,11 +30,15 @@ export default function Login({
   const handleLogin = () => {
     try {
       LoginSchema.parse(data);
-      console.log("Đăng nhập thành công");
-      handleLoginSuccess(true);
-      navigate("/channels/me/0");
-      setData({ username: "", password: "" } as StateLoginProp);
-      setErrors({} as StateLoginProp);
+      toast.success("Đăng nhập thành công");
+      // toast.error("Đăng nhập thất bại");
+
+      setTimeout(() => {
+        handleLoginSuccess(true);
+        navigate("/channels/me/0");
+        setData({ username: "", password: "" } as StateLoginProp);
+        setErrors({} as StateLoginProp);
+      }, 1000);
     } catch (error) {
       if (error instanceof z.ZodError) {
         const errorMap = {} as StateLoginProp;
@@ -47,6 +52,7 @@ export default function Login({
         });
         setErrors(errorMap);
       }
+      toast.warning("Bạn phải nhập đầy đủ thông tin");
     }
   };
 
