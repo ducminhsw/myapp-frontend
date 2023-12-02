@@ -1,42 +1,45 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { handleUserLogin } from "../../../services/authService";
 const LoginSchema = z
   .object({
-    username: z.string().min(1, { message: "Vui lòng nhập tên người dùng" }),
+    email: z.string().min(1, { message: "Vui lòng nhập tên người dùng" }),
     password: z.string().min(1, { message: "Vui lòng nhập mật khẩu" }),
   })
   .required();
-
+interface KeyboardEventWithCode extends KeyboardEvent {
+  code: string;
+}
 type Prop = {
   statusUser: string;
   setStatusUser: (vale: string) => void;
   handleSwapLoginandRegister: (value: string) => void;
   handleLoginSuccess: (value: boolean) => void;
 };
-type StateLoginProp = { username: string; password: string };
+type StateLoginProp = { email: string; password: string };
 export default function Login({
   statusUser,
-  setStatusUser,
   handleSwapLoginandRegister,
   handleLoginSuccess,
 }: Prop) {
   const navigate = useNavigate();
-  const [data, setData] = useState({ username: "", password: "" });
+  const [data, setData] = useState({ email: "", password: "" });
 
   const [errors, setErrors] = useState({} as StateLoginProp);
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     try {
       LoginSchema.parse(data);
-      toast.success("Đăng nhập thành công");
-      // toast.error("Đăng nhập thất bại");
+      let res = await handleUserLogin({ password: data.password, email: data.email });
+      console.log(res.data);
 
+      res && localStorage.setItem("userCredentials", JSON.stringify(res.data?.userCredentials));
       setTimeout(() => {
         handleLoginSuccess(true);
         navigate("/channels/me/0");
-        setData({ username: "", password: "" } as StateLoginProp);
+        setData({ email: "", password: "" } as StateLoginProp);
         setErrors({} as StateLoginProp);
       }, 1000);
     } catch (error) {
@@ -51,11 +54,23 @@ export default function Login({
           }
         });
         setErrors(errorMap);
+        toast.warning("Bạn phải nhập đầy đủ thông tin");
       }
-      toast.warning("Bạn phải nhập đầy đủ thông tin");
     }
   };
-
+  useEffect(() => {
+    const listener = (event: KeyboardEventWithCode) => {
+      if (event.code === "Enter" || event.code === "NumpadEnter") {
+        console.log("Enter key was pressed. Run your function.");
+        event.preventDefault();
+        handleLogin();
+      }
+    };
+    document.addEventListener("keydown", listener);
+    return () => {
+      document.removeEventListener("keydown", listener);
+    };
+  }, [data]);
   return (
     <>
       <section className="flex flex-col rounded-md w-[400px] h-[500px] gap-[15px] bg-white p-5 mx-[auto]">
@@ -81,11 +96,11 @@ export default function Login({
         <input
           type="text"
           className="rounded-md p-3 border-purple-600 border-[1px] text-black"
-          placeholder="Tài khoản..."
-          value={data.username}
-          onChange={(e) => setData({ ...data, username: e.target.value })}
+          placeholder="Tài khoản Email..."
+          value={data.email}
+          onChange={(e) => setData({ ...data, email: e.target.value })}
         />
-        {errors.username && <span style={{ color: "red" }}>{errors.username}</span>}
+        {errors.email && <span style={{ color: "red" }}>{errors.email}</span>}
         <input
           type="password"
           className="rounded-md p-3  border-purple-600 border-[1px] text-black"

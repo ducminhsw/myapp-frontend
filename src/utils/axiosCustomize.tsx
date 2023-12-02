@@ -2,9 +2,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const instance = axios.create({
-  // baseURL: 'http://localhost:8080'
-  // baseURL: 'https://hanoisecommercewbe.onrender.com/'
-  baseURL: "https://hanoisbe.onrender.com/",
+  baseURL: "http://localhost:3000/",
 });
 
 instance.defaults.withCredentials = true;
@@ -29,6 +27,14 @@ instance.interceptors.response.use(
     // console.log('>>> interceptor',response);
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
+    console.log(response);
+    const { code, message } = response.data;
+    switch (code) {
+      default: {
+        toast.success(message);
+      }
+    }
+
     return response && response.data ? response.data : response;
   },
   function (error) {

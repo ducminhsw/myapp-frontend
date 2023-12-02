@@ -57,7 +57,7 @@ const ChatComp = () => {
             })}
           </div>
         </div>
-        <div className="mx-[12px] bg-[#52555e] rounded-md p-2 mb-[10px]">
+        <div className="mx-[12px] bg-[#52555e]  rounded-md p-2 mb-[10px]">
           <i className="fa-solid fa-plus rounded-full  bg-slate-500 px-[9px] py-[8px] cursor-pointer hover:opacity-50"></i>
           <input
             className="p-2 text-[white] w-[90%] bg-transparent outline-none"

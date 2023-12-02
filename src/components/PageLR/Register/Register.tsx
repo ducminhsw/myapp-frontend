@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
+import { handleUserRegister } from "../../../services/authService";
 
 const RegisterSchema = z
   .object({
@@ -12,6 +13,8 @@ const RegisterSchema = z
     firstName: z.string().min(1, { message: "Vui lòng nhập firstName" }),
     password: z.string().min(1, { message: "Vui lòng nhập password" }),
     passwordAgain: z.string().min(1, { message: "Vui lòng nhập lại password" }),
+    dateOfBirth: z.string().min(1, { message: "Vui lòng nhập dateOfBirth" }),
+    phoneNumber: z.string().min(1, { message: "Vui lòng nhập phoneNumber" }),
   })
   .required()
   .refine((data) => data.password === data.passwordAgain, {
@@ -23,7 +26,10 @@ type Prop = {
   setStatusUser: (vale: string) => void;
   handleSwapLoginandRegister: (value: string) => void;
 };
-export default function Register({ statusUser, setStatusUser, handleSwapLoginandRegister }: Prop) {
+interface KeyboardEventWithCode extends KeyboardEvent {
+  code: string;
+}
+export default function Register({ statusUser, handleSwapLoginandRegister }: Prop) {
   const [data, setData] = useState({
     username: "",
     email: "",
@@ -31,6 +37,8 @@ export default function Register({ statusUser, setStatusUser, handleSwapLoginand
     firstName: "",
     password: "",
     passwordAgain: "",
+    dateOfBirth: "",
+    phoneNumber: "",
   });
   type StateRegisterProp = {
     username: string;
@@ -39,14 +47,25 @@ export default function Register({ statusUser, setStatusUser, handleSwapLoginand
     firstName: string;
     password: string;
     passwordAgain: string;
+    dateOfBirth: string;
+    phoneNumber: string;
   };
 
   const [errors, setErrors] = useState({} as StateRegisterProp);
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     try {
-      RegisterSchema.parse(data);
-      console.log("Đăng ký thành công", data);
+      let parseData = RegisterSchema.parse(data);
+      console.log("Đăng ký thành công", parseData);
+      let res = await handleUserRegister({
+        username: data.username,
+        password: data.password,
+        email: data.email,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        dateOfBirth: data.dateOfBirth,
+        phoneNumber: data.phoneNumber,
+      });
       setData({
         username: "",
         email: "",
@@ -54,6 +73,8 @@ export default function Register({ statusUser, setStatusUser, handleSwapLoginand
         firstName: "",
         password: "",
         passwordAgain: "",
+        dateOfBirth: "",
+        phoneNumber: "",
       } as StateRegisterProp);
       setErrors({} as StateRegisterProp);
     } catch (error) {
@@ -71,7 +92,19 @@ export default function Register({ statusUser, setStatusUser, handleSwapLoginand
       }
     }
   };
-
+  useEffect(() => {
+    const listener = (event: KeyboardEventWithCode) => {
+      if (event.code === "Enter" || event.code === "NumpadEnter") {
+        console.log("Enter key was pressed. Run your function.");
+        event.preventDefault();
+        handleRegister();
+      }
+    };
+    document.addEventListener("keydown", listener);
+    return () => {
+      document.removeEventListener("keydown", listener);
+    };
+  }, [data]);
   return (
     <>
       <section className="flex flex-col rounded-md w-[400px] h-max-[800px] gap-[15px] bg-white p-5 mx-[auto]">
@@ -133,6 +166,28 @@ export default function Register({ statusUser, setStatusUser, handleSwapLoginand
             {errors.lastName && <span style={{ color: "red" }}>{errors.lastName}</span>}
           </div>
         </section>
+        <div className="flex  gap-[5px]">
+          <div className="flex flex-col w-[50%] ">
+            <input
+              type="text"
+              className="rounded-md p-3  border-purple-600 border-[1px]  text-black"
+              placeholder="Ngày sinh"
+              value={data.dateOfBirth}
+              onChange={(e) => setData({ ...data, dateOfBirth: e.target.value })}
+            />
+            {errors.dateOfBirth && <span style={{ color: "red" }}>{errors.dateOfBirth}</span>}
+          </div>
+          <div className="flex flex-col w-[50%]">
+            <input
+              type="text"
+              className="rounded-md p-3  border-purple-600 border-[1px]  text-black"
+              placeholder="Số điện thoại"
+              value={data.phoneNumber}
+              onChange={(e) => setData({ ...data, phoneNumber: e.target.value })}
+            />
+            {errors.phoneNumber && <span style={{ color: "red" }}>{errors.phoneNumber}</span>}
+          </div>
+        </div>
         <div className="flex  gap-[5px]">
           <div className="flex flex-col w-[50%] ">
             <input
