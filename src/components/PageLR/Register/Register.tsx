@@ -217,7 +217,7 @@ export default function Register({ statusUser, handleSwapLoginandRegister }: Pro
         >
           Đăng ký
         </span>
-        <span className="text-black rounded-md p-3 ">
+        <span className="text-black rounded-md ">
           Bạn đã có tài khoản ?{" "}
           <span
             className="text-purple-600 font-medium hover:cursor-pointer hover:underline"
