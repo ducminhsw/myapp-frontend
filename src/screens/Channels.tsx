@@ -4,7 +4,6 @@ import { SampleIC } from "../assets/images";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
-import { Modal } from "antd";
 import InfoModal from "./InfoModal";
 let arrChanels = [
   { channelsId: "0", name: "Kênh trò chuyện" },
@@ -38,14 +37,9 @@ const Channels = () => {
   };
 
   const showModal = () => {
-    setIsModalOpen(true);
+    setIsModalOpen((prev) => !prev);
   };
-
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
+  const handleClose = () => {
     setIsModalOpen(false);
   };
   return (
@@ -74,7 +68,7 @@ const Channels = () => {
           })}
           <div className="flex w-full flex-row justify-evenly  bg-[#27282c] absolute bottom-0 py-2 ">
             <div
-              className=" flex flex-row gap-2 items-center hover:opacity-60  hover:cursor-pointer"
+              className=" flex flex-row gap-2 items-center hover:opacity-60  hover:cursor-pointer select-none"
               onClick={showModal}
             >
               <div className="bg-slate-400 rounded-full">
@@ -85,7 +79,9 @@ const Channels = () => {
                 <div className="overflow-hidden text-ellipsis font-thin text-xs">ducminh22222</div>
               </div>
             </div>
-            <InfoModal className="absolute bottom-[50px] right-[-50px] w-[300px] rounded-xl border-gray-100" />
+            {isModalOpen ? (
+              <InfoModal className="absolute bottom-[50px] modal-content right-[-50px] w-[300px] rounded-xl border-gray-100" />
+            ) : null}
             <div className="  flex flex-row gap-4 justify-center items-center">
               <div className="" onClick={handleChangeMute}>
                 {isMute ? (
