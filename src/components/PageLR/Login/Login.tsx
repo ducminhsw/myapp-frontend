@@ -3,6 +3,7 @@ import { z } from "zod";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { handleUserLogin } from "../../../services/authService";
+import { setUser } from "../../../redux/features/user/userSlice";
 const LoginSchema = z
   .object({
     email: z.string().min(1, { message: "Vui lòng nhập tên người dùng" }),
@@ -34,7 +35,6 @@ export default function Login({
       LoginSchema.parse(data);
       let res = await handleUserLogin({ password: data.password, email: data.email });
       console.log(res.data);
-
       res && localStorage.setItem("userCredentials", JSON.stringify(res.data?.userCredentials));
       setTimeout(() => {
         handleLoginSuccess(true);

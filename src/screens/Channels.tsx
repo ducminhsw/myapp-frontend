@@ -12,6 +12,7 @@ let arrChanels = [
   { channelsId: "3", name: "English group" },
   { channelsId: "4", name: "Video call" },
 ];
+
 const Channels = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();

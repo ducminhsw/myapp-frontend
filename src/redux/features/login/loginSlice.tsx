@@ -13,6 +13,8 @@ export const loginSlice = createSlice({
   initialState,
   reducers: {
     setLogin: (state) => {
+      console.log("setlogin");
+
       state.isLogin = true;
     },
     setLogout: (state) => {

@@ -1,5 +1,5 @@
 import { Outlet, RouterProvider, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { useSelector, useDispatch } from "react-redux";
 import GroupIC from "./components/groups/GroupIC";
@@ -7,6 +7,7 @@ import PageLR from "./components/PageLR/PageLR";
 import GroupCreate from "./components/groups/GroupCreate";
 import { RootState } from "./redux/store";
 import { Modal } from "antd";
+import { setUser } from "./redux/features/user/userSlice";
 
 let arrGroupIc = [
   {
@@ -35,6 +36,8 @@ let Me = {
   channelsId: "0",
 };
 function App() {
+  const dispatch = useDispatch();
+
   const isLogin = useSelector((state: RootState) => state.login.isLogin);
   const navigate = useNavigate();
   const handleNavigate = (groupicId: string, channelsId: string) => {
@@ -57,6 +60,11 @@ function App() {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+  useEffect(() => {
+    dispatch(setUser());
+    console.log("dat");
+    console.log("isLogin", isLogin);
+  }, []);
   return (
     <>
       {isLogin == true ? (

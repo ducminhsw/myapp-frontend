@@ -1,14 +1,10 @@
 import { SampleIC } from "../assets/images";
 import { useState, useEffect } from "react";
-type Props = {
-  className?: string;
-};
+import { Props, UserCredentials } from "./InfoModal.type";
+
 export default function InfoModal(props: Props) {
-  let [userCredentials, setUserCredentials] = useState({});
-  useEffect(() => {
-    let data = localStorage.getItem("userCredentials");
-    data && setUserCredentials(JSON.parse(data));
-  }, []);
+  let [userCredentials, setUserCredentials] = useState<UserCredentials>({} as UserCredentials);
+
   return (
     <>
       <section {...props}>
