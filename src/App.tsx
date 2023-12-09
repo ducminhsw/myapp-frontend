@@ -1,66 +1,53 @@
-import { Outlet, RouterProvider, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./App.css";
 import { useSelector, useDispatch } from "react-redux";
-import GroupIC from "./components/groups/GroupIC";
+import ServerIC from "./components/servers/ServerIC";
 import PageLR from "./components/PageLR/PageLR";
-import GroupCreate from "./components/groups/GroupCreate";
+import ServerCreate from "./components/servers/ServerCreate";
 import { RootState } from "./redux/store";
-import { Modal } from "antd";
 import { setUser } from "./redux/features/user/userSlice";
-import { AnyAction, Dispatch } from "redux";
-
-let arrGroupIc = [
+let arrServerIc = [
   {
-    groupicId: "0",
+    servericId: "0",
     channelsId: "0",
   },
   {
-    groupicId: "1",
+    servericId: "1",
     channelsId: "0",
   },
   {
-    groupicId: "2",
+    servericId: "2",
     channelsId: "0",
   },
   {
-    groupicId: "3",
+    servericId: "3",
     channelsId: "0",
   },
   {
-    groupicId: "4",
+    servericId: "4",
     channelsId: "0",
   },
 ];
 let Me = {
-  groupicId: "me",
+  servericId: "me",
   channelsId: "0",
 };
 function App() {
   const dispatch = useDispatch();
-
   const isLogin = useSelector((state: RootState) => state.login.isLogin);
   const navigate = useNavigate();
-  const handleNavigate = (groupicId: string, channelsId: string) => {
-    console.log(groupicId);
+  const handleNavigate = (servericId: string, channelsId: string) => {
+    console.log(servericId);
 
-    const newUrl = `/channels/${groupicId}/${channelsId}`;
+    const newUrl = `/channels/${servericId}/${channelsId}`;
     navigate(newUrl, { replace: true });
   };
-
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const showModal = () => {
     setIsModalOpen(true);
   };
 
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
   useEffect(() => {
     console.log("render");
     dispatch(setUser());
@@ -69,35 +56,30 @@ function App() {
     }
     console.log("isLogin", isLogin);
   }, [dispatch, setUser, isLogin]);
+
   return (
     <>
       {isLogin == true ? (
         <>
           <div className="flex h-full w-full items-centers">
             <div className="flex flex-col h-full w-20 bg-[#1e1f22] items-centers pt-[20px]">
-              <GroupIC {...Me} onClick={() => handleNavigate(Me.groupicId, Me.channelsId)} />
-              {arrGroupIc.map((item, index) => {
+              <ServerIC {...Me} onClick={() => handleNavigate(Me.servericId, Me.channelsId)} />
+              {arrServerIc.map((item, index) => {
                 return (
-                  <GroupIC
+                  <ServerIC
                     key={index}
                     {...item}
-                    onClick={() => handleNavigate(item.groupicId, item.channelsId)}
+                    onClick={() => handleNavigate(item.servericId, item.channelsId)}
                   />
                 );
               })}
-              <GroupCreate onClick={showModal} />
+              <ServerCreate
+                onClick={showModal}
+                isModalOpen={isModalOpen}
+                setIsModalOpen={setIsModalOpen}
+              />
             </div>
             <Outlet />
-            <Modal
-              title="Create New Group"
-              open={isModalOpen}
-              onOk={handleOk}
-              onCancel={handleCancel}
-            >
-              <p>Some contents...</p>
-              <p>Some contents...</p>
-              <p>Some contents...</p>
-            </Modal>
           </div>
         </>
       ) : (

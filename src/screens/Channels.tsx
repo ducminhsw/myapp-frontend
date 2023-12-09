@@ -16,12 +16,12 @@ let arrChanels = [
 const Channels = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
-  const { idGroup } = useParams();
+  const { idServer } = useParams();
   const [isMute, setIsMute] = useState(false);
   const [isMuteHP, setIsMuteHP] = useState(false);
 
   const handleClick = (channelsId: string) => {
-    const newUrl = `/channels/${idGroup}/${channelsId}`;
+    const newUrl = `/channels/${idServer}/${channelsId}`;
     navigate(newUrl, { replace: true });
   };
   const handleChangeMute = () => {

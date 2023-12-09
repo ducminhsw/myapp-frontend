@@ -30,7 +30,7 @@ export const router = createBrowserRouter([
         element: <Channels />,
         children: [
           {
-            path: "/channels/:idGroup/:idChannel",
+            path: "/channels/:idServer/:idChannel",
             element: <ChatComp />,
           },
         ],

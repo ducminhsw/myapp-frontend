@@ -1,5 +1,5 @@
 export type UserState = {
-    _id: string;
+    userId: string;
     role: string;
     username: string;
     firstName: string;
