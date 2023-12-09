@@ -1,4 +1,4 @@
-import { setLogout } from "../../redux/features/login/loginSlice";
+import { handleLogout } from "../../redux/features/login/loginSlice";
 import Message from "./Message";
 import ContentIcon from "./icons/ContentIcon";
 import ListMemBerIcon from "./icons/ListMemBerIcon";
@@ -42,7 +42,7 @@ const ChatComp = () => {
               <i
                 className="fa-solid fa-right-from-bracket cursor-pointer hover:opacity-50"
                 onClick={() => {
-                  dispatch(setLogout());
+                  dispatch(handleLogout());
                   navigate("/");
                 }}
               ></i>

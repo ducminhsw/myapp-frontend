@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { z } from "zod";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { handleUserLogin } from "../../../services/authService";
-import { setUser } from "../../../redux/features/user/userSlice";
+import { useDispatch } from "react-redux";
+import { handleLoginRedux } from "../../../redux/features/login/loginSlice";
 const LoginSchema = z
   .object({
     email: z.string().min(1, { message: "Vui lòng nhập tên người dùng" }),
@@ -17,15 +17,12 @@ type Prop = {
   statusUser: string;
   setStatusUser: (vale: string) => void;
   handleSwapLoginandRegister: (value: string) => void;
-  handleLoginSuccess: (value: boolean) => void;
 };
 type StateLoginProp = { email: string; password: string };
-export default function Login({
-  statusUser,
-  handleSwapLoginandRegister,
-  handleLoginSuccess,
-}: Prop) {
+
+export default function Login({ statusUser, handleSwapLoginandRegister }: Prop) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [data, setData] = useState({ email: "", password: "" });
 
   const [errors, setErrors] = useState({} as StateLoginProp);
@@ -33,11 +30,9 @@ export default function Login({
   const handleLogin = async () => {
     try {
       LoginSchema.parse(data);
-      let res = await handleUserLogin({ password: data.password, email: data.email });
-      console.log(res.data);
-      res && localStorage.setItem("userCredentials", JSON.stringify(res.data?.userCredentials));
+      let dataRedux = { email: data.email, password: data.password };
+      dispatch(handleLoginRedux(dataRedux));
       setTimeout(() => {
-        handleLoginSuccess(true);
         navigate("/channels/me/0");
         setData({ email: "", password: "" } as StateLoginProp);
         setErrors({} as StateLoginProp);

@@ -2,7 +2,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { UserState } from "./userSlice.type";
 import { setLogin } from "../login/loginSlice";
-
 const initialState: UserState = {
     _id: '',
     role: '',
@@ -14,22 +13,19 @@ const initialState: UserState = {
     verified: false,
     token: ''
 };
-
 export const setUser = createAsyncThunk(
   'user/setUser',
-  async (data: UserState, { dispatch }) => {
-    console.log('dat1');
+  async (_, { dispatch }) => {
     let storedData: any = localStorage.getItem("userCredentials");
     if (storedData) {
       storedData = JSON.parse(storedData);
     }
-    if (storedData && storedData.userCredentials && storedData.userCredentials.token) {
+    if (storedData && storedData.token) {
       // Dispatch setLogin action from loginSlice
       dispatch(setLogin());
       return storedData;
     }
-    console.log('dat2');
-    return data;
+    return null;
   }
 );
 

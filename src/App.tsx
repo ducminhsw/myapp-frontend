@@ -8,6 +8,7 @@ import GroupCreate from "./components/groups/GroupCreate";
 import { RootState } from "./redux/store";
 import { Modal } from "antd";
 import { setUser } from "./redux/features/user/userSlice";
+import { AnyAction, Dispatch } from "redux";
 
 let arrGroupIc = [
   {
@@ -61,10 +62,13 @@ function App() {
     setIsModalOpen(false);
   };
   useEffect(() => {
+    console.log("render");
     dispatch(setUser());
-    console.log("dat");
+    if (isLogin) {
+      navigate("/channels/me/0");
+    }
     console.log("isLogin", isLogin);
-  }, []);
+  }, [dispatch, setUser, isLogin]);
   return (
     <>
       {isLogin == true ? (
