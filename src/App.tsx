@@ -71,27 +71,21 @@ function App() {
       <div className="flex justify-between items-center p-5 border-b-2 border-b-black">
         <h4>Logo</h4>
         <div className="flex items-center gap-5">
-          <div
-            className="cursor-pointer hover:opacity-50"
-            onClick={handleFriendsClick}
-          >
+          <div className="cursor-pointer hover:opacity-50" onClick={handleFriendsClick}>
             <ListMemBerIcon />
           </div>
           <i
             className="fa-solid fa-right-from-bracket cursor-pointer hover:opacity-50"
             onClick={() => {
               dispatch(handleLogout());
-              navigate("/");
+              navigate("/auth");
             }}
           ></i>
         </div>
       </div>
       <div className="flex h-full w-full items-centers">
         <div className="flex flex-col h-full w-20 bg-[#1e1f22] items-centers pt-[20px]">
-          <GroupIC
-            {...Me}
-            onClick={() => handleNavigate(Me.groupicId, Me.channelsId)}
-          />
+          <GroupIC {...Me} onClick={() => handleNavigate(Me.groupicId, Me.channelsId)} />
           {arrGroupIc.map((item, index) => {
             return (
               <GroupIC
@@ -104,12 +98,7 @@ function App() {
           <GroupCreate onClick={showModal} />
         </div>
         <Outlet />
-        <Modal
-          title="Create New Group"
-          open={isModalOpen}
-          onOk={handleOk}
-          onCancel={handleCancel}
-        >
+        <Modal title="Create New Group" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
           <p>Some contents...</p>
           <p>Some contents...</p>
           <p>Some contents...</p>
