@@ -1,11 +1,10 @@
 import { SampleIC } from "../../assets/images";
 import { useState } from "react";
 import { Props, UserCredentials } from "./InfoModal.type";
+import { useSelector } from "react-redux";
 
 export default function InfoModal(props: Props) {
-  const [userCredentials, setUserCredentials] = useState<UserCredentials>(
-    {} as UserCredentials
-  );
+  const userCredentials = useSelector((state: { user: UserCredentials }) => state.user);
 
   return (
     <>
@@ -14,7 +13,7 @@ export default function InfoModal(props: Props) {
           <div className="bg-blue-500 h-[80px] rounded-t-xl"></div>
           <div className="bg-[#26282b] h-[300px] rounded-b-xl">
             <div className="bg-[#26282b] h-[50px] "></div>
-            <div className="bg-[#17181b]  px-[15px] pt-[5px] w-[85%]  h-[75%]  rounded-xl m-auto flex flex-col gap-[5px]">
+            <div className="bg-[#17181b]  px-[15px] pt-[5px] w-[85%]  h-[80%]  rounded-xl m-auto flex flex-col gap-[5px]">
               <div className="flex flex-col   ">
                 <span className="text-lg font-medium">
                   {`${userCredentials.firstName}
@@ -22,6 +21,7 @@ export default function InfoModal(props: Props) {
                 </span>
                 <span className="pb-[5px]">{userCredentials.username}</span>
                 <hr className="opacity-25 " />
+                <span className="pb-[5px] font-mono italic">{userCredentials.email}</span>
               </div>
               <div className="flex flex-col  ">
                 <span className=" font-medium">Tạo tài khoản từ</span>
@@ -33,7 +33,7 @@ export default function InfoModal(props: Props) {
                 <hr className="opacity-25 " />
               </div>
               <div className="py-3 px-2 rounded-md hover:bg-[#44474d]">
-                <span>Đổi Tài Khoản</span>
+                <span className="cursor-pointer">Đổi Tài Khoản</span>
               </div>
             </div>
           </div>

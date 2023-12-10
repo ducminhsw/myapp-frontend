@@ -1,8 +1,10 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 import ChannelBar from "../../components/channels/ChannelBar";
 import { SampleIC } from "../../assets/images";
 import { useState } from "react";
 import InfoModal from "../InfoModal/InfoModal";
+import { useSelector } from "react-redux";
+import { UserCredentials } from "../InfoModal/InfoModal.type";
 
 const arrChanels = [
   { channelsId: "0", name: "Kênh trò chuyện" },
@@ -14,12 +16,15 @@ const arrChanels = [
 
 const Channels = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
   const [isMute, setIsMute] = useState(false);
   const [isMuteHP, setIsMuteHP] = useState(false);
+  const userCredentials = useSelector((state: { user: UserCredentials }) => state.user);
+  const { idServer } = useParams();
 
   const handleClick = (channelsId: string) => {
-    // const newUrl = `/channels/${idGroup}/${channelsId}`;
-    // navigate(newUrl, { replace: true });
+    const newUrl = `/channels/${idServer}/${channelsId}`;
+    navigate(newUrl, { replace: true });
     console.log(channelsId);
   };
 
@@ -76,8 +81,12 @@ const Channels = () => {
               <img className="rounded-full w-5 h-5 object-cover" src={SampleIC} alt="" />
             </div>
             <div className="max-w-[70px]">
-              <div className="overflow-hidden text-ellipsis font-thin text-xs">ducming22222</div>
-              <div className="overflow-hidden text-ellipsis font-thin text-xs">ducminh22222</div>
+              <div className="overflow-hidden text-ellipsis font-thin text-xs">
+                {userCredentials.username}
+              </div>
+              <div className="overflow-hidden text-ellipsis font-thin text-xs">
+                {userCredentials.email}
+              </div>
             </div>
           </div>
           {isModalOpen ? (

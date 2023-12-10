@@ -40,7 +40,7 @@ export const router = createBrowserRouter([
         ),
         children: [
           {
-            path: "/channels/:idGroup/:idChannel",
+            path: "/channels/:idServer/:idChannel",
             element: (
               <ProtectedRoute>
                 <ChatComp />

@@ -6,9 +6,10 @@ import PageLR from "./components/PageLR/PageLR";
 import ServerCreate from "./components/servers/ServerCreate";
 import { Modal } from "antd";
 import ListMemBerIcon from "./components/chats/icons/ListMemBerIcon";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { handleLogout } from "./redux/features/login/loginSlice";
 import { setUser } from "./redux/features/user/userSlice";
+import { UserCredentials } from "./screens/InfoModal/InfoModal.type";
 
 const arrServerIc = [
   {
@@ -41,8 +42,6 @@ const Me = {
 function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const userCredentials = localStorage.getItem("userCredentials");
 
   const handleNavigate = (servericId: string, channelsId: string) => {
     const newUrl = `/channels/${servericId}/${channelsId}`;
