@@ -1,5 +1,5 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import ServerIC from "./components/servers/ServerIC";
 import PageLR from "./components/PageLR/PageLR";
@@ -8,6 +8,7 @@ import { Modal } from "antd";
 import ListMemBerIcon from "./components/chats/icons/ListMemBerIcon";
 import { useDispatch } from "react-redux";
 import { handleLogout } from "./redux/features/login/loginSlice";
+import { setUser } from "./redux/features/user/userSlice";
 
 const arrServerIc = [
   {
@@ -64,9 +65,12 @@ function App() {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+  useEffect(() => {
+    dispatch(setUser());
+  }, [dispatch, setUser]);
 
   return (
-    <div className="h-[calc(100vh-64px)]">
+    <div className="h-[calc(100vh-64px)] ">
       <div className="flex justify-between items-center p-5 border-b-2 border-b-black">
         <h4>Logo</h4>
         <div className="flex items-center gap-5">
@@ -101,11 +105,6 @@ function App() {
           />
         </div>
         <Outlet />
-        <Modal title="Create New Group" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-        </Modal>
       </div>
     </div>
   );

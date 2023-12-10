@@ -21,14 +21,13 @@ const ChatComp = () => {
 
   useEffect(() => {
     if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop =
-        chatContainerRef.current.scrollHeight;
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
   }, []);
 
   return (
     <>
-      <section className="flex flex-col w-full">
+      <section className="flex h-full flex-col w-full">
         <div className="h-full ">
           <div className="flex justify-between px-[10px] py-[10px] shadow-md ">
             <div className="flex">
