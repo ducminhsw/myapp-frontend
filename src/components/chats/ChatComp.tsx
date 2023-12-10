@@ -1,11 +1,8 @@
-import { handleLogout } from "../../redux/features/login/loginSlice";
 import Message from "./Message";
 import ContentIcon from "./icons/ContentIcon";
-import ListMemBerIcon from "./icons/ListMemBerIcon";
 import { useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-let arr = [
+
+const arr = [
   {
     id: "0",
     name: "Minh",
@@ -21,13 +18,14 @@ let arr = [
 
 const ChatComp = () => {
   const chatContainerRef = useRef<HTMLDivElement>(null);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   useEffect(() => {
     if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
     }
   }, []);
+
   return (
     <>
       <section className="flex flex-col w-full">
@@ -37,23 +35,17 @@ const ChatComp = () => {
               <ContentIcon className="mx-[5px] " />
               <span>general</span>
             </div>
-            <div className="flex flex-row items-center gap-3">
-              <ListMemBerIcon />
-              <i
-                className="fa-solid fa-right-from-bracket cursor-pointer hover:opacity-50"
-                onClick={() => {
-                  dispatch(handleLogout());
-                  navigate("/");
-                }}
-              ></i>
-            </div>
           </div>
           <div
             className="overflow-y overflow-scroll scroll-smooth max-h-[80vh] overflow-x-hidden"
             ref={chatContainerRef}
           >
             {arr.map((item, index) => {
-              return <Message {...item} />;
+              return (
+                <div key={index}>
+                  <Message {...item} />
+                </div>
+              );
             })}
           </div>
         </div>

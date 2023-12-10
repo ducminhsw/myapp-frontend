@@ -20,7 +20,10 @@ type Prop = {
 };
 type StateLoginProp = { email: string; password: string };
 
-export default function Login({ statusUser, handleSwapLoginandRegister }: Prop) {
+export default function Login({
+  statusUser,
+  handleSwapLoginandRegister,
+}: Prop) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [data, setData] = useState({ email: "", password: "" });
@@ -30,10 +33,10 @@ export default function Login({ statusUser, handleSwapLoginandRegister }: Prop) 
   const handleLogin = async () => {
     try {
       LoginSchema.parse(data);
-      let dataRedux = { email: data.email, password: data.password };
+      const dataRedux = { email: data.email, password: data.password };
       dispatch(handleLoginRedux(dataRedux));
       setTimeout(() => {
-        navigate("/channels/me/0");
+        navigate("/channels/friends");
         setData({ email: "", password: "" } as StateLoginProp);
         setErrors({} as StateLoginProp);
       }, 1000);
@@ -42,7 +45,7 @@ export default function Login({ statusUser, handleSwapLoginandRegister }: Prop) 
         const errorMap = {} as StateLoginProp;
         error.errors.forEach((e) => {
           if (e.path) {
-            let param = e.path[0];
+            const param = e.path[0];
             if (param) {
               errorMap[param as keyof StateLoginProp] = e.message;
             }
@@ -53,6 +56,7 @@ export default function Login({ statusUser, handleSwapLoginandRegister }: Prop) 
       }
     }
   };
+
   useEffect(() => {
     const listener = (event: KeyboardEventWithCode) => {
       if (event.code === "Enter" || event.code === "NumpadEnter") {
@@ -103,7 +107,9 @@ export default function Login({ statusUser, handleSwapLoginandRegister }: Prop) 
           value={data.password}
           onChange={(e) => setData({ ...data, password: e.target.value })}
         />
-        {errors.password && <span style={{ color: "red" }}>{errors.password}</span>}
+        {errors.password && (
+          <span style={{ color: "red" }}>{errors.password}</span>
+        )}
         <span className="text-purple-600">Quên mật khẩu?</span>
         <span
           className="bg-purple-600 p-3 text-white rounded-md mt-[10px] hover:opacity-50 text-center"

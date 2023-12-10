@@ -7,9 +7,9 @@ interface ChannelBarProps {
 }
 
 const ChannelBar = ({ onClick, channelBarId, name }: ChannelBarProps) => {
-  let { idChannel } = useParams();
+  const { idChannel } = useParams();
 
-  let isActiveChannelBar = channelBarId == idChannel;
+  const isActiveChannelBar = channelBarId == idChannel;
   return (
     <div className="hover:cursor-pointer rounded" onClick={onClick}>
       <div
@@ -18,7 +18,11 @@ const ChannelBar = ({ onClick, channelBarId, name }: ChannelBarProps) => {
         } hover:bg-[#44474d] rounded-md box-border m-2`}
       >
         <div className="p-2">
-          <img className="rounded-full w-5 h-5 object-cover" src={SampleIC} alt="" />
+          <img
+            className="rounded-full w-5 h-5 object-cover"
+            src={SampleIC}
+            alt=""
+          />
         </div>
         <h3>{name}</h3>
       </div>

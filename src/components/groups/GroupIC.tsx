@@ -7,9 +7,11 @@ interface IGroupProp {
 }
 const GroupIC = (props: IGroupProp) => {
   const { idGroup } = useParams();
+
   const isActiveGroup = idGroup === props.groupicId;
+
   return (
-    <div className="mb-3 " onClick={props.onClick}>
+    <div className="mb-3" onClick={props.onClick}>
       <div className="flex flex-col items-center">
         <img
           className={`rounded-full w-12 h-12 object-cover hover:opacity-50 cursor-pointer ${

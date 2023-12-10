@@ -1,11 +1,8 @@
 import { useState } from "react";
 import Login from "./Login/Login";
 import Register from "./Register/Register";
-import { useDispatch } from "react-redux";
 
-type Props = {};
-export default function PageLR({}: Props) {
-  const dispatch = useDispatch();
+export default function PageLR(): JSX.Element {
   const [statusUser, setStatusUser] = useState("login");
   const handleSwapLoginandRegister = (value: string) => {
     if (value === "login") {

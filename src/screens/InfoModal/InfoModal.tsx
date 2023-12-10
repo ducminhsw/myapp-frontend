@@ -1,9 +1,11 @@
-import { SampleIC } from "../assets/images";
-import { useState, useEffect } from "react";
+import { SampleIC } from "../../assets/images";
+import { useState } from "react";
 import { Props, UserCredentials } from "./InfoModal.type";
 
 export default function InfoModal(props: Props) {
-  let [userCredentials, setUserCredentials] = useState<UserCredentials>({} as UserCredentials);
+  const [userCredentials, setUserCredentials] = useState<UserCredentials>(
+    {} as UserCredentials
+  );
 
   return (
     <>

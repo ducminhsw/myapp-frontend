@@ -10,10 +10,20 @@ const initialState: LoginState = {
 
 export const handleLoginRedux = createAsyncThunk(
   "login/handleLogin",
-  async (data: { email: string; password: string }, { dispatch }: { dispatch: AppDispatch }) => {
-    let res = await handleUserLogin({ password: data.password, email: data.email });
-    res && localStorage.setItem("userCredentials", JSON.stringify(res.data?.userCredentials));
-  },
+  async (
+    data: { email: string; password: string },
+    { dispatch }: { dispatch: AppDispatch }
+  ) => {
+    const res = await handleUserLogin({
+      password: data.password,
+      email: data.email,
+    });
+    res &&
+      localStorage.setItem(
+        "userCredentials",
+        JSON.stringify(res.data?.userCredentials)
+      );
+  }
 );
 
 export const loginSlice = createSlice({

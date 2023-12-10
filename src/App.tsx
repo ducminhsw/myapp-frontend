@@ -1,16 +1,15 @@
-import { Outlet, RouterProvider, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import "./App.css";
-import { useSelector, useDispatch } from "react-redux";
 import GroupIC from "./components/groups/GroupIC";
 import PageLR from "./components/PageLR/PageLR";
 import GroupCreate from "./components/groups/GroupCreate";
-import { RootState } from "./redux/store";
 import { Modal } from "antd";
-import { setUser } from "./redux/features/user/userSlice";
-import { AnyAction, Dispatch } from "redux";
+import ListMemBerIcon from "./components/chats/icons/ListMemBerIcon";
+import { useDispatch } from "react-redux";
+import { handleLogout } from "./redux/features/login/loginSlice";
 
-let arrGroupIc = [
+const arrGroupIc = [
   {
     groupicId: "0",
     channelsId: "0",
@@ -32,20 +31,25 @@ let arrGroupIc = [
     channelsId: "0",
   },
 ];
-let Me = {
+
+const Me = {
   groupicId: "me",
   channelsId: "0",
 };
+
 function App() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const isLogin = useSelector((state: RootState) => state.login.isLogin);
-  const navigate = useNavigate();
-  const handleNavigate = (groupicId: string, channelsId: string) => {
-    console.log(groupicId);
+  const userCredentials = localStorage.getItem("userCredentials");
 
+  const handleNavigate = (groupicId: string, channelsId: string) => {
     const newUrl = `/channels/${groupicId}/${channelsId}`;
     navigate(newUrl, { replace: true });
+  };
+
+  const handleFriendsClick = () => {
+    navigate("/channels/friends");
   };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -61,49 +65,57 @@ function App() {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  useEffect(() => {
-    console.log("render");
-    dispatch(setUser());
-    if (isLogin) {
-      navigate("/channels/me/0");
-    }
-    console.log("isLogin", isLogin);
-  }, [dispatch, setUser, isLogin]);
+
   return (
-    <>
-      {isLogin == true ? (
-        <>
-          <div className="flex h-full w-full items-centers">
-            <div className="flex flex-col h-full w-20 bg-[#1e1f22] items-centers pt-[20px]">
-              <GroupIC {...Me} onClick={() => handleNavigate(Me.groupicId, Me.channelsId)} />
-              {arrGroupIc.map((item, index) => {
-                return (
-                  <GroupIC
-                    key={index}
-                    {...item}
-                    onClick={() => handleNavigate(item.groupicId, item.channelsId)}
-                  />
-                );
-              })}
-              <GroupCreate onClick={showModal} />
-            </div>
-            <Outlet />
-            <Modal
-              title="Create New Group"
-              open={isModalOpen}
-              onOk={handleOk}
-              onCancel={handleCancel}
-            >
-              <p>Some contents...</p>
-              <p>Some contents...</p>
-              <p>Some contents...</p>
-            </Modal>
+    <div className="h-[calc(100vh-64px)]">
+      <div className="flex justify-between items-center p-5 border-b-2 border-b-black">
+        <h4>Logo</h4>
+        <div className="flex items-center gap-5">
+          <div
+            className="cursor-pointer hover:opacity-50"
+            onClick={handleFriendsClick}
+          >
+            <ListMemBerIcon />
           </div>
-        </>
-      ) : (
-        <PageLR />
-      )}
-    </>
+          <i
+            className="fa-solid fa-right-from-bracket cursor-pointer hover:opacity-50"
+            onClick={() => {
+              dispatch(handleLogout());
+              navigate("/");
+            }}
+          ></i>
+        </div>
+      </div>
+      <div className="flex h-full w-full items-centers">
+        <div className="flex flex-col h-full w-20 bg-[#1e1f22] items-centers pt-[20px]">
+          <GroupIC
+            {...Me}
+            onClick={() => handleNavigate(Me.groupicId, Me.channelsId)}
+          />
+          {arrGroupIc.map((item, index) => {
+            return (
+              <GroupIC
+                key={index}
+                {...item}
+                onClick={() => handleNavigate(item.groupicId, item.channelsId)}
+              />
+            );
+          })}
+          <GroupCreate onClick={showModal} />
+        </div>
+        <Outlet />
+        <Modal
+          title="Create New Group"
+          open={isModalOpen}
+          onOk={handleOk}
+          onCancel={handleCancel}
+        >
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+        </Modal>
+      </div>
+    </div>
   );
 }
 
