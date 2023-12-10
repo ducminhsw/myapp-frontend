@@ -47,15 +47,11 @@ const Channels = () => {
 
   return (
     <div className="flex h-full w-full bg-[#313338] ">
-      <div className="h-full w-[20%] bg-[#2b2d31] relative">
+      <div className=" w-[20%] bg-[#2b2d31] relative">
         <div className="box-border p-2">
           <div className="flex items-center w-full h-16 bg-[#2b2d31] shadow-md hover:cursor-pointer">
             <div className="p-2">
-              <img
-                className="rounded-full w-5 h-5 object-cover"
-                src={SampleIC}
-                alt=""
-              />
+              <img className="rounded-full w-5 h-5 object-cover" src={SampleIC} alt="" />
             </div>
             <h3>RFC BKLdabs</h3>
           </div>
@@ -77,19 +73,11 @@ const Channels = () => {
             onClick={showModal}
           >
             <div className="bg-slate-400 rounded-full">
-              <img
-                className="rounded-full w-5 h-5 object-cover"
-                src={SampleIC}
-                alt=""
-              />
+              <img className="rounded-full w-5 h-5 object-cover" src={SampleIC} alt="" />
             </div>
             <div className="max-w-[70px]">
-              <div className="overflow-hidden text-ellipsis font-thin text-xs">
-                ducming22222
-              </div>
-              <div className="overflow-hidden text-ellipsis font-thin text-xs">
-                ducminh22222
-              </div>
+              <div className="overflow-hidden text-ellipsis font-thin text-xs">ducming22222</div>
+              <div className="overflow-hidden text-ellipsis font-thin text-xs">ducminh22222</div>
             </div>
           </div>
           {isModalOpen ? (
