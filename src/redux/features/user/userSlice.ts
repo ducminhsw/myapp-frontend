@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { UserState } from "./userSlice.type";
 import { setLogin } from "../login/loginSlice";
 const initialState: UserState = {
-    _id: '',
+    userId: '',
     role: '',
     username: '',
     firstName: '',
@@ -19,6 +19,7 @@ export const setUser = createAsyncThunk(
     let storedData: any = localStorage.getItem("userCredentials");
     if (storedData) {
       storedData = JSON.parse(storedData);
+      console.log('storedData',storedData);
     }
     if (storedData && storedData.token) {
       // Dispatch setLogin action from loginSlice
