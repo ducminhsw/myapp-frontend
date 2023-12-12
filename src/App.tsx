@@ -1,15 +1,12 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./App.css";
-import ServerIC from "./components/servers/ServerIC";
-import PageLR from "./components/PageLR/PageLR";
-import ServerCreate from "./components/servers/ServerCreate";
-import { Modal } from "antd";
-import ListMemBerIcon from "./components/chats/icons/ListMemBerIcon";
-import { useDispatch, useSelector } from "react-redux";
-import { handleLogout } from "./redux/features/login/loginSlice";
-import { setUser } from "./redux/features/user/userSlice";
-import { UserCredentials } from "./screens/InfoModal/InfoModal.type";
+import ServerIC from "./components/server/server-ic";
+import ServerCreate from "./components/server/create-server";
+import ListMemBerIcon from "./assets/icons/list-member";
+import { useDispatch } from "react-redux";
+import { handleLogout } from "./redux/features/auth/slice";
+import { setUser } from "./redux/features/user/slice";
 
 const arrServerIc = [
   {
@@ -69,7 +66,7 @@ function App() {
   }, [dispatch, setUser]);
 
   return (
-    <div className="h-[100vh] ">
+    <div className="h-[100vh]">
       <div className="flex justify-between items-center p-5 border-b-2 border-b-black">
         <h4>Logo</h4>
         <div className="flex items-center gap-5">
@@ -85,7 +82,7 @@ function App() {
           ></i>
         </div>
       </div>
-      <div className="flex h-[calc(100vh-66px)]  w-full items-centers">
+      <div className="flex h-[calc(100vh-66px)] w-full items-centers">
         <div className="flex flex-col  w-20 bg-[#1e1f22] items-centers pt-[20px]">
           <ServerIC {...Me} onClick={() => handleNavigate(Me.servericId, Me.channelsId)} />
           {arrServerIc.map((item, index) => {
