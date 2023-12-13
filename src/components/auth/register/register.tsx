@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { z } from "zod";
-import { handleUserRegister } from "../../../services/api/auth-api";
+import { handleUserRegister } from "../../../services/api/friend-api";
 
 const RegisterSchema = z
   .object({

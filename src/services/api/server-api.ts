@@ -19,49 +19,42 @@ interface IDeleteServerParams {}
 
 const createServer = (
   data: IServerCreationData
-): IPromiseAxiosReturnType<Server> => axios.post(`api/v1/server/new`, data);
+): IPromiseAxiosReturnType<Server> => axios.post(`api/v1/server/server`, data);
 
 // pending
 const deleteServer = (
   data: IDeleteRequestCreator<IDeleteServerParams>
-): IPromiseAxiosReturnType<Server> =>
-  axios.delete(`api/v1/server/:serverId`, data);
+): IPromiseAxiosReturnType<Server> => axios.delete(`api/v1/server`, data);
 
 const getServerInformation = (
   data: IServerCreationData
-): IPromiseAxiosReturnType<Server> =>
-  axios.post(`api/v1/server/:serverId`, data);
+): IPromiseAxiosReturnType<Server> => axios.post(`api/v1/server`, data);
 
 // pending
 const editServerInformation = (
   data: IServerCreationData
-): IPromiseAxiosReturnType<Server> =>
-  axios.put(`api/v1/server/:serverId`, data);
+): IPromiseAxiosReturnType<Server> => axios.put(`api/v1/server`, data);
 
 const requestJoinServer = (
   data: IServerCreationData
-): IPromiseAxiosReturnType<null> =>
-  axios.post(`api/v1/server/:serverId/on`, data);
+): IPromiseAxiosReturnType<null> => axios.post(`api/v1/server/on`, data);
 
 const acceptUserJoin = (
   data: IServerCreationData
-): IPromiseAxiosReturnType<null> =>
-  axios.post(`api/v1/server/:serverId/:targetUserId/accept`, data);
+): IPromiseAxiosReturnType<null> => axios.post(`api/v1/server/accept`, data);
 
 const requestLeaveServer = (
   data: IServerCreationData
-): IPromiseAxiosReturnType<null> =>
-  axios.post(`api/v1/server/:serverId/off`, data);
+): IPromiseAxiosReturnType<null> => axios.post(`api/v1/server/off`, data);
 
 const resignServerPosition = (
   data: IServerCreationData
-): IPromiseAxiosReturnType<null> =>
-  axios.post(`api/v1/server/:serverId/resign`, data);
+): IPromiseAxiosReturnType<null> => axios.post(`api/v1/server/resign`, data);
 
 const deleteUserInServer = (
   data: IDeleteRequestCreator<IDeleteServerParams>
 ): IPromiseAxiosReturnType<null> =>
-  axios.delete(`api/v1/server/:serverId/:targetUserId`, data);
+  axios.delete(`api/v1/server/server/target`, data);
 
 export {
   createServer,

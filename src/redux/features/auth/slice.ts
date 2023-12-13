@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { handleUserLogin } from "../../../services/api/auth-api";
+import { handleUserLogin } from "../../../services/api/friend-api";
 import { AuthState } from "./constant";
 
 export interface LoginState {

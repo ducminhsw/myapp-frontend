@@ -13,3 +13,13 @@ export interface IDeleteRequestCreator<T> {
 export type IPromiseAxiosReturnType<T> = Promise<
   AxiosResponse<IBasicResponse<T>>["data"]
 >;
+
+export const generateUrlWithParams = (
+  url: string,
+  params: { [key: string]: string }
+) => {
+  Object.keys(params).forEach((param) => {
+    url = url.replace(":" + param, String(params[param]));
+  });
+  return [url, params];
+};
