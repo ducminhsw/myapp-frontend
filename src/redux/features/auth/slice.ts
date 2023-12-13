@@ -1,19 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { handleUserLogin } from "../../../services/api/authentication";
-import { AppDispatch } from "../../store";
+import { handleUserLogin } from "../../../services/api/auth-api";
+import { AuthState } from "./constant";
+
 export interface LoginState {
   isLogin: boolean;
 }
+
 const initialState: LoginState = {
   isLogin: false,
 };
 
 export const handleLoginRedux = createAsyncThunk(
   "login/handleLogin",
-  async (
-    data: { email: string; password: string },
-    { dispatch }: { dispatch: AppDispatch }
-  ) => {
+  async (data: { email: string; password: string }) => {
     const res = await handleUserLogin({
       password: data.password,
       email: data.email,
@@ -40,9 +39,26 @@ export const loginSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(handleLoginRedux.fulfilled, (state, action) => {
+    builder.addCase(handleLoginRedux.fulfilled, (state) => {
       state.isLogin = true;
     });
+  },
+});
+
+const initialAuthState: AuthState = {
+  loading: false,
+  failedTimes: 0,
+  loggedSuccess: false,
+};
+
+export const handleLoginAction = {};
+
+export const authSlice = createSlice({
+  name: "auth",
+  initialState: initialAuthState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase();
   },
 });
 

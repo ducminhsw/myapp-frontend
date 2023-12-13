@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { InternalAxiosRequestConfig } from "axios";
 import { toast } from "react-toastify";
 
 const instance = axios.create({
@@ -8,40 +8,27 @@ const instance = axios.create({
 instance.defaults.withCredentials = true;
 // Add a request interceptor
 instance.interceptors.request.use(
-  function (config) {
-    // const access_token = store?.getState()?.user?.account?.access_token;
-    // console.log(access_token);
-    // config.headers["Authorization"] = `Bearer ${access_token}`;
-    // Do something before request is sent
+  function (config: InternalAxiosRequestConfig) {
+    const token = localStorage.getItem("token");
+    if (token) config.headers["Authorization"] = `Bearer ${token}`;
     return config;
   },
   function (error) {
-    // Do something with request error
     return Promise.reject(error);
-  },
+  }
 );
 
-// Add a response interceptor
 instance.interceptors.response.use(
   function (response) {
-    // console.log('>>> interceptor',response);
-    // Any status code that lie within the range of 2xx cause this function to trigger
-    // Do something with response data
-    console.log(response);
     const { code, message } = response.data;
     switch (code) {
       default: {
         toast.success(message);
       }
     }
-
     return response && response.data ? response.data : response;
   },
   function (error) {
-    // Any status codes that falls outside the range of 2xx cause this function to trigger
-    // Do something with response error
-    // const status = (error && error.response && error.response.status) || 500;
-
     if (error.response.data && error.response.EC === -999) {
       window.location.href = "/";
     }
@@ -92,6 +79,6 @@ instance.interceptors.response.use(
         return Promise.reject(error);
       }
     }
-  },
+  }
 );
 export default instance;

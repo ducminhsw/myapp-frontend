@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { z } from "zod";
-import { handleUserRegister } from "../../../services/api/authentication";
+import { handleUserRegister } from "../../../services/api/auth-api";
 
 const RegisterSchema = z
   .object({
@@ -29,7 +29,10 @@ type Prop = {
 interface KeyboardEventWithCode extends KeyboardEvent {
   code: string;
 }
-export default function Register({ statusUser, handleSwapLoginandRegister }: Prop) {
+export default function Register({
+  statusUser,
+  handleSwapLoginandRegister,
+}: Prop) {
   const [data, setData] = useState({
     username: "",
     email: "",
@@ -135,7 +138,9 @@ export default function Register({ statusUser, handleSwapLoginandRegister }: Pro
           value={data.username}
           onChange={(e) => setData({ ...data, username: e.target.value })}
         />
-        {errors.username && <span style={{ color: "red" }}>{errors.username}</span>}
+        {errors.username && (
+          <span style={{ color: "red" }}>{errors.username}</span>
+        )}
         <input
           type="text"
           className="rounded-md p-3 border-purple-600 border-[1px]  text-black"
@@ -154,7 +159,9 @@ export default function Register({ statusUser, handleSwapLoginandRegister }: Pro
               value={data.firstName}
               onChange={(e) => setData({ ...data, firstName: e.target.value })}
             />
-            {errors.firstName && <div style={{ color: "red" }}>{errors.firstName}</div>}
+            {errors.firstName && (
+              <div style={{ color: "red" }}>{errors.firstName}</div>
+            )}
           </div>
           <div className="flex flex-col ">
             <input
@@ -164,7 +171,9 @@ export default function Register({ statusUser, handleSwapLoginandRegister }: Pro
               value={data.lastName}
               onChange={(e) => setData({ ...data, lastName: e.target.value })}
             />
-            {errors.lastName && <span style={{ color: "red" }}>{errors.lastName}</span>}
+            {errors.lastName && (
+              <span style={{ color: "red" }}>{errors.lastName}</span>
+            )}
           </div>
         </section>
         <div className="flex  gap-[5px]">
@@ -174,9 +183,13 @@ export default function Register({ statusUser, handleSwapLoginandRegister }: Pro
               className="rounded-md p-3  border-purple-600 border-[1px]  text-black"
               placeholder="Ngày sinh"
               value={data.dateOfBirth}
-              onChange={(e) => setData({ ...data, dateOfBirth: e.target.value })}
+              onChange={(e) =>
+                setData({ ...data, dateOfBirth: e.target.value })
+              }
             />
-            {errors.dateOfBirth && <span style={{ color: "red" }}>{errors.dateOfBirth}</span>}
+            {errors.dateOfBirth && (
+              <span style={{ color: "red" }}>{errors.dateOfBirth}</span>
+            )}
           </div>
           <div className="flex flex-col w-[50%]">
             <input
@@ -184,9 +197,13 @@ export default function Register({ statusUser, handleSwapLoginandRegister }: Pro
               className="rounded-md p-3  border-purple-600 border-[1px]  text-black"
               placeholder="Số điện thoại"
               value={data.phoneNumber}
-              onChange={(e) => setData({ ...data, phoneNumber: e.target.value })}
+              onChange={(e) =>
+                setData({ ...data, phoneNumber: e.target.value })
+              }
             />
-            {errors.phoneNumber && <span style={{ color: "red" }}>{errors.phoneNumber}</span>}
+            {errors.phoneNumber && (
+              <span style={{ color: "red" }}>{errors.phoneNumber}</span>
+            )}
           </div>
         </div>
         <div className="flex  gap-[5px]">
@@ -198,7 +215,9 @@ export default function Register({ statusUser, handleSwapLoginandRegister }: Pro
               value={data.password}
               onChange={(e) => setData({ ...data, password: e.target.value })}
             />
-            {errors.password && <span style={{ color: "red" }}>{errors.password}</span>}
+            {errors.password && (
+              <span style={{ color: "red" }}>{errors.password}</span>
+            )}
           </div>
           <div className="flex flex-col w-[50%]">
             <input
@@ -206,9 +225,13 @@ export default function Register({ statusUser, handleSwapLoginandRegister }: Pro
               className="rounded-md p-3  border-purple-600 border-[1px]  text-black"
               placeholder="Nhập Lại Mật khẩu..."
               value={data.passwordAgain}
-              onChange={(e) => setData({ ...data, passwordAgain: e.target.value })}
+              onChange={(e) =>
+                setData({ ...data, passwordAgain: e.target.value })
+              }
             />
-            {errors.passwordAgain && <span style={{ color: "red" }}>{errors.passwordAgain}</span>}
+            {errors.passwordAgain && (
+              <span style={{ color: "red" }}>{errors.passwordAgain}</span>
+            )}
           </div>
         </div>
 

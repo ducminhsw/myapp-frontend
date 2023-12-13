@@ -1,3 +1,3 @@
-import SampleIC from "./sampleImg.jpg";
+import SampleIC from "./sample.jpg";
 
 export { SampleIC };

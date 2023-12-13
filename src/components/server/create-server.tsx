@@ -2,7 +2,7 @@ import { Modal, Select } from "antd";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { useState } from "react";
-import { createServer } from "../../services/api/server";
+import { createServer } from "../../services/api/server-api";
 
 interface IServerProp {
   url?: string;

@@ -70,7 +70,10 @@ function App() {
       <div className="flex justify-between items-center p-5 border-b-2 border-b-black">
         <h4>Logo</h4>
         <div className="flex items-center gap-5">
-          <div className="cursor-pointer hover:opacity-50" onClick={handleFriendsClick}>
+          <div
+            className="cursor-pointer hover:opacity-50"
+            onClick={handleFriendsClick}
+          >
             <ListMemBerIcon />
           </div>
           <i
@@ -84,7 +87,10 @@ function App() {
       </div>
       <div className="flex h-[calc(100vh-66px)] w-full items-centers">
         <div className="flex flex-col  w-20 bg-[#1e1f22] items-centers pt-[20px]">
-          <ServerIC {...Me} onClick={() => handleNavigate(Me.servericId, Me.channelsId)} />
+          <ServerIC
+            {...Me}
+            onClick={() => handleNavigate(Me.servericId, Me.channelsId)}
+          />
           {arrServerIc.map((item, index) => {
             return (
               <ServerIC

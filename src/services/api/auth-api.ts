@@ -36,19 +36,24 @@ interface ILoginRegisterInformation {
       dateOfStory: Date;
     }[];
     friends: {
-        user: string,
-        createAt: Date
+      user: string;
+      createAt: Date;
     }[];
     banned: boolean;
     token: string;
   };
 }
 
-const handleUserRegister = (data: IRegisterParams): IPromiseAxiosReturnType<ILoginRegisterInformation> => {
-  return axios.post(`api/v1/auth/register`, data);}
+const handleUserRegister = (
+  data: IRegisterParams
+): IPromiseAxiosReturnType<ILoginRegisterInformation> => {
+  return axios.post(`api/v1/auth/register`, data);
+};
 
-const handleUserLogin = (data: ILoginParams): IPromiseAxiosReturnType<ILoginRegisterInformation> => {
+const handleUserLogin = (
+  data: ILoginParams
+): IPromiseAxiosReturnType<ILoginRegisterInformation> => {
   return axios.post(`api/v1/auth/login`, data);
-}
+};
 
 export { handleUserLogin, handleUserRegister };
