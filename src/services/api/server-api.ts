@@ -1,4 +1,4 @@
-import { Server } from "../../components/server/server.type.ts";
+import { Server } from "../../components/server/server-constant.ts";
 import axios from "../../utils/customize-axios.tsx";
 import {
   IDeleteRequestCreator,
