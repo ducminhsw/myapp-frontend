@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
-import Channels from "../screens/channel/channel";
+import App from "../App";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Channels />, // channels
+    element: <App />, // channels
     children: [
       {
         path: "channels",
