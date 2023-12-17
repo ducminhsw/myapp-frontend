@@ -61,6 +61,7 @@ const StyledServerImage = styled.img.attrs<{ choosen: boolean; src?: string }>(
   border-radius: ${(props) => (props.choosen ? "12px" : "100%")};
   transition: border-radius 0.2s ease-in-out;
   &:hover {
+    cursor: pointer;
     border-radius: 12px;
   }
 `;

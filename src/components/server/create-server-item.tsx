@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import { DiscordAddServerIc } from "../../assets/icons/add-server-item";
 
 const DiscordCreateServerIc = () => {
   return (
     <StyledServerItemContainer>
-      <StyledServerImage />
+      <DiscordAddServerIc />
     </StyledServerItemContainer>
   );
 };
@@ -15,12 +16,10 @@ const StyledServerItemContainer = styled.div`
   width: 60px;
   height: 60px;
   margin-bottom: 6px;
-`;
-
-const StyledServerImage = styled.img`
-  width: 48px;
-  height: 48px;
-  transition: border-radius 0.2s ease-in-out;
+  &:hover {
+    cursor: pointer;
+    border-radius: 12px;
+  }
 `;
 
 export default DiscordCreateServerIc;

@@ -52,8 +52,10 @@ const DiscordServerList = ({
 
 const StyledListServer = styled.div`
   height: 100vh;
-  width: 60px;
   padding-top: 6px;
+  padding-right: 6px;
+  padding-left: 6px;
+  border-right: 1px solid white;
 `;
 
 const StyledMyServerItem = styled.div`
