@@ -41,9 +41,9 @@ export const router = createBrowserRouter([
           {
             path: "/channels/:idServer/:idChannel",
             element: (
-              <ProtectedRoute>
-                <ChatComp />
-              </ProtectedRoute>
+              // <ProtectedRoute>
+              <ChatComp />
+              // </ProtectedRoute>
             ),
           },
         ],
