@@ -34,10 +34,7 @@ const DiscordServerItem = ({
 
   return (
     <StyledServerItemContainer onClick={onChoosingServerNode}>
-      <StyledServerImage
-        src={isMyServer ? GigaChad : serverImg}
-        choosen={isChoosen}
-      />
+      <StyledServerImage src={isMyServer ? GigaChad : serverImg} choosen={isChoosen} />
     </StyledServerItemContainer>
   );
 };
@@ -51,11 +48,9 @@ const StyledServerItemContainer = styled.div`
   margin-bottom: 6px;
 `;
 
-const StyledServerImage = styled.img.attrs<{ choosen: boolean; src?: string }>(
-  (props) => ({
-    src: props.src || TomHardy,
-  })
-)`
+export const StyledServerImage = styled.img.attrs<{ choosen: boolean; src?: string }>((props) => ({
+  src: props.src || TomHardy,
+}))`
   width: 48px;
   height: 48px;
   border-radius: ${(props) => (props.choosen ? "12px" : "100%")};
