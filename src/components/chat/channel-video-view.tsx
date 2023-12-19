@@ -4,9 +4,12 @@ import DiscordVideoFrameItem from "./video-item";
 const DiscordVideoCallList = () => {
   return (
     <StyledVideoFrameList>
-      <DiscordVideoFrameItem />
-      <DiscordVideoFrameItem />
-      <DiscordVideoFrameItem />
+      <StyledListContainer>
+        <DiscordVideoFrameItem />
+        <DiscordVideoFrameItem />
+        <DiscordVideoFrameItem />
+        <DiscordVideoFrameItem />
+      </StyledListContainer>
     </StyledVideoFrameList>
   );
 };
@@ -14,9 +17,18 @@ const DiscordVideoCallList = () => {
 export default DiscordVideoCallList;
 
 const StyledVideoFrameList = styled.div`
-  width: 100%;
-  height: 100vh;
+  width: 60%;
   display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledListContainer = styled.div`
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   gap: 10px;
 `;
