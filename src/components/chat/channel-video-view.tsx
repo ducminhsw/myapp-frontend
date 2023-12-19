@@ -5,6 +5,8 @@ const DiscordVideoCallList = () => {
   return (
     <StyledVideoFrameList>
       <DiscordVideoFrameItem />
+      <DiscordVideoFrameItem />
+      <DiscordVideoFrameItem />
     </StyledVideoFrameList>
   );
 };

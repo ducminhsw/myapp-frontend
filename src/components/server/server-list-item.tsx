@@ -56,6 +56,9 @@ const StyledListServer = styled.div`
   padding-right: 6px;
   padding-left: 6px;
   border-right: 1px solid white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const StyledMyServerItem = styled.div`
@@ -75,6 +78,8 @@ const StyledHorizontalLine = styled.hr`
   margin: 0 auto;
 `;
 
-const StyledServerCreatorItem = styled.div``;
+const StyledServerCreatorItem = styled.div`
+  margin-top: 6px;
+`;
 
 export default DiscordServerList;

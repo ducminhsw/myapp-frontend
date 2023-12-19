@@ -3,14 +3,6 @@ import ChatBody from "./chat-body";
 import ChatHeader from "./chat-header";
 import ChatInput from "./chat-input";
 
-const StyleTest = styled.div`
-  & {
-    display: flex;
-    flex-direction: column;
-    background-color: #2f3136;
-    height: 100vh;
-  }
-`;
 const ScreenChannelChat = () => {
   return (
     <StyleTest>
@@ -22,3 +14,12 @@ const ScreenChannelChat = () => {
 };
 
 export default ScreenChannelChat;
+
+const StyleTest = styled.div`
+  & {
+    display: flex;
+    flex-direction: column;
+    background-color: #2f3136;
+    height: 100vh;
+  }
+`;

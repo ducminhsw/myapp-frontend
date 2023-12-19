@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import Channels from "../screens/channel/channel";
-import ChatComp from "../components/chat/channel-chat-view";
+import ChatScreen from "../components/chat/channel-chat-view";
 
 export const router = createBrowserRouter([
   {
@@ -10,13 +9,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "channels",
-        element: (
-          <>
-            <ChatComp />
-            {/* <div>Channel</div> */}
-            {/* <Outlet /> */}
-          </>
-        ),
+        element: <ChatScreen />,
         // children: [
         //   {
         //     path: "@me",
