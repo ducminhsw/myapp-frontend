@@ -3,7 +3,7 @@ import DiscordServerList from "./components/server/server-list-item";
 import { useState } from "react";
 import styled from "styled-components";
 import { serverDataMock } from "./components/server/server-mock";
-
+import { Toaster } from "react-hot-toast";
 function App() {
   const [nodeChoosen, setNodeChoosen] = useState<string>("");
 
@@ -15,6 +15,7 @@ function App() {
         dataSource={serverDataMock}
       />
       <Outlet />
+      <Toaster />
     </StyledDiscordPageContainer>
   );
 }

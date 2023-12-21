@@ -2,7 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Channels from "../screens/channel/channel";
 import ChatComp from "../components/chat/channel-chat-view";
-
+import TabSignInAuthentication from "../components/auth/signin/sign-in";
+import TabSignUpAuthentication from "../components/auth/signup/sign-up";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -11,12 +12,8 @@ export const router = createBrowserRouter([
       {
         path: "channels",
         element: (
-          <>
-            <ChatComp />
-            {/* <div>Channel</div> */}
-            {/* <Outlet /> */}
-          </>
-        ),
+          <ChatComp />
+        )
         // children: [
         //   {
         //     path: "@me",
@@ -55,6 +52,18 @@ export const router = createBrowserRouter([
         //   },
         // ],
       },
+      {
+        path: "login",
+        element: (
+          <TabSignInAuthentication />
+        )
+      },
+      {
+        path: "register",
+        element: (
+          <TabSignUpAuthentication />
+        )
+      }
     ],
   },
 ]);

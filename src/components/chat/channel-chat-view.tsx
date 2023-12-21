@@ -2,7 +2,8 @@ import styled from "styled-components";
 import ChatBody from "./chat-body";
 import ChatHeader from "./chat-header";
 import ChatInput from "./chat-input"
-
+import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
 const StyleTest = styled.div`
   &{
     display:flex;
@@ -11,7 +12,34 @@ const StyleTest = styled.div`
     height: 100vh;
   }
 `
+
+// const socket = io("http://localhost:3000");
+
+interface User {
+  _id: string;
+  online: boolean;
+}
+
 const ScreenChannelChat = () => {
+
+  // const [friendList, setFriendList] = useState<User[]>([]);
+
+  // useEffect(() => {
+
+  //   // notify userId online to other users
+  //   socket.emit('user-connected', { userId: 123 })
+
+  //   // modify status of user online exclude myself
+  //   socket.on('user-connected', ({ userId }) => {
+  //     const hasIdx = friendList.findIndex(user => user._id === userId);
+
+  //     if (hasIdx === -1) return;
+
+
+  //   })
+
+  // }, [])
+
   return <StyleTest>
     <ChatHeader />
     <ChatBody />
