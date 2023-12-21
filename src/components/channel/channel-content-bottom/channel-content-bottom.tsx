@@ -33,7 +33,7 @@ const StyledServerImage = styled.img.attrs<{ src?: string }>((props) => ({
 `;
 
 const StyledContentBottom = styled.div`
-  background-color: yellow;
+  background-color: var(--color-layout-lg);
   display: flex;
   flex-direction: row;
 `;

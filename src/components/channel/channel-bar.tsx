@@ -19,7 +19,7 @@ const StyledChannelBar = styled.div`
   width: 240px;
   display: flex;
   flex-direction: column;
-  background-color: #971c1c;
+  background-color: var(--color-layout-md);
   flex: 0 0 auto;
-  color: black;
+  color: var(--color-text);
 `;

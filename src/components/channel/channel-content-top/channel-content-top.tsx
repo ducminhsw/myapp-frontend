@@ -1,44 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-
+import "./channel-content-top.modules.css";
 export default function ChannelContentTop() {
+  const [isChatChannel, setIsChatChannel] = useState<boolean>(true);
+  const [isChatVoice, setIsChatVoice] = useState<boolean>(true);
+
   return (
     <StyledContentTop>
       <StyledContentTopScroll>
-        <div>Máy chủ của Văn</div>
-        <StyledButton>Máy chủ của Văn</StyledButton>
+        <div className="nameServer ">Máy chủ của Văn</div>
+        <StyledButton className="textServer">Máy chủ của Văn</StyledButton>
         <StyledChat>
-          <div>
-            <i className="fa-solid fa-angle-down"></i> KÊNH CHAT
+          <div className="styledChat" onClick={() => setIsChatChannel((prev) => !prev)}>
+            {isChatChannel ? (
+              <i className="fa-solid fa-angle-down"></i>
+            ) : (
+              <i className="fa-solid fa-chevron-right"></i>
+            )}
+            <span>KÊNH CHAT</span>
           </div>
-          <StyledButton>
-            <span># chung</span>
-            <span>+</span>
-          </StyledButton>
+          {isChatChannel && (
+            <StyledButton>
+              <span># chung</span>
+              <span>+</span>
+            </StyledButton>
+          )}
         </StyledChat>
         <StyledVoice>
-          <div>
-            <i className="fa-solid fa-angle-down"></i> KÊNH VOICE
+          <div className="styledChat" onClick={() => setIsChatVoice((prev) => !prev)}>
+            {isChatVoice ? (
+              <i className="fa-solid fa-angle-down"></i>
+            ) : (
+              <i className="fa-solid fa-chevron-right"></i>
+            )}
+            KÊNH VOICE
           </div>
-          <StyledButton>
-            <span># chung</span>
-            <span>+</span>
-          </StyledButton>
-          <div>
-            <StyledButton>
-              <i className="fa-solid fa-volume-high"></i> General
-            </StyledButton>
-          </div>
+          {isChatVoice && (
+            <div>
+              <StyledButton>
+                <span># chung</span>
+                <span>+</span>
+              </StyledButton>
+              <StyledButton>
+                <i className="fa-solid fa-volume-high"></i> General
+              </StyledButton>
+            </div>
+          )}
         </StyledVoice>
       </StyledContentTopScroll>
     </StyledContentTop>
   );
 }
 
-const StyledChat = styled.div``;
-const StyledVoice = styled.div``;
+const StyledChat = styled.div`
+  padding-top: 10px;
+`;
+const StyledVoice = styled.div`
+  padding-top: 10px;
+`;
 const StyledContentTopScroll = styled.div`
   height: 320px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const StyledContentTop = styled.div`
@@ -53,6 +76,7 @@ const StyledButton = styled.div`
   padding: 10px;
   border-radius: 5px;
   &:hover {
-    background-color: #297fb8;
+    background-color: var(--color-btn-hover);
+    color: var(--color-text-hover);
   }
 `;
