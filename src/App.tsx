@@ -9,9 +9,24 @@ import { socket } from "./socket/socket";
 function App() {
   const [nodeChoosen, setNodeChoosen] = useState<string>("");
 
+  // socket part
+  const [_isConnect, setIsConnect] = useState<boolean>(false);
+
   useEffect(() => {
     socket.on("connect", () => {
       console.log("Frontend connected");
+      setIsConnect(true);
+    });
+
+    socket.on("disconnect", () => {
+      console.log("Client disconnect");
+      setIsConnect(false);
+    });
+
+    socket.on("disconnect", (reason, description) => {
+      console.log(reason, description);
+      socket.emit("Client has been offline");
+      setIsConnect(false);
     });
   });
 

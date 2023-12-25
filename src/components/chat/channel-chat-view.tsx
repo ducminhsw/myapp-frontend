@@ -2,18 +2,6 @@ import styled from "styled-components";
 import ChatBody from "./chat-body";
 import ChatHeader from "./chat-header";
 import ChatInput from "./chat-input";
-
-const StyleTest = styled.div`
-  & {
-    display: flex;
-    flex-direction: column;
-    background-color: #2f3136;
-    height: 100vh;
-  }
-`;
-
-// const socket = io("http://localhost:3000");
-
 // interface User {
 //   _id: string;
 //   online: boolean;
@@ -47,3 +35,12 @@ const ScreenChannelChat = () => {
 };
 
 export default ScreenChannelChat;
+
+const StyleTest = styled.div`
+  & {
+    display: flex;
+    flex-direction: column;
+    background-color: #2f3136;
+    height: 100vh;
+  }
+`;
