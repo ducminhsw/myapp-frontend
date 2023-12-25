@@ -1,11 +1,18 @@
 import { Outlet } from "react-router-dom";
 import DiscordServerList from "./components/server/server-list-item";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { serverDataMock } from "./components/server/server-mock";
+import { socket } from "./socket/socket";
 
 function App() {
   const [nodeChoosen, setNodeChoosen] = useState<string>("");
+
+  useEffect(() => {
+    socket.on("connect", () => {
+      console.log("Frontend connected");
+    });
+  });
 
   return (
     <StyledDiscordPageContainer>
