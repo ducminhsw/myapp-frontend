@@ -1,6 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import ChatScreen from "../components/chat/channel-chat-view";
+import TabSignInAuthentication from "../components/auth/signin/sign-in";
+import TabSignUpAuthentication from "../components/auth/signup/sign-up";
+import ScreenChannelChat from "../components/chat/channel-chat-view";
 import DiscordVideoCallList from "../components/chat/channel-video-view";
 
 export const router = createBrowserRouter([
@@ -10,11 +12,20 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "channels",
-        element: <ChatScreen />,
+        element: <ScreenChannelChat />,
+        // element: <ChatScreen />,
       },
       {
         path: "videos",
         element: <DiscordVideoCallList />,
+      },
+      {
+        path: "login",
+        element: <TabSignInAuthentication />,
+      },
+      {
+        path: "register",
+        element: <TabSignUpAuthentication />,
       },
     ],
   },

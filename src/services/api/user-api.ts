@@ -6,18 +6,18 @@ interface IGetUserInformationRequest {
   email: string;
 }
 
-interface IGetUserInformationResponse {
-  role: string;
+export interface IGetUserInformationResponse {
+  role?: string;
+  email: string;
   username: string;
-  firstName: string;
-  lastName: string;
-  avatar: string;
+  displayName: string;
+  password: string;
   dateOfBirth: string;
-  storyNow: string;
 }
 
-export const getUserProfile = (
+export const registerAccount = (
   data: IGetUserInformationRequest
 ): IPromiseAxiosReturnType<IGetUserInformationResponse> => {
   return axios.post(`api/v1/auth/register`, data);
 };
+

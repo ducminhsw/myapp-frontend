@@ -3,6 +3,7 @@ import DiscordServerList from "./components/server/server-list-item";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { serverDataMock } from "./components/server/server-mock";
+import { Toaster } from "react-hot-toast";
 import { socket } from "./socket/socket";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         dataSource={serverDataMock}
       />
       <Outlet />
+      <Toaster />
     </StyledDiscordPageContainer>
   );
 }
