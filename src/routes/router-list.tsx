@@ -12,9 +12,7 @@ export const router = createBrowserRouter([
     path: "/",
     element: (
       <>
-        {/* <ProtectedRoute> */}
         <App />
-        {/* // </ProtectedRoute> */}
         <ToastContainer
           position="bottom-right"
           autoClose={5000}
