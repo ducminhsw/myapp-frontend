@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import DiscordServerItem from "./server-item";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import { IDiscordServerItemData } from "./server-constant";
 import DiscordCreateServerIc from "./create-server-item";
 import { GigaChad } from "../../assets/images";
@@ -16,7 +16,10 @@ const DiscordServerList = ({
   nodeChoosen,
   setNodeChoosen,
 }: IListServerItem) => {
-  const MyServerImage = GigaChad;
+  const MyServerImage = GigaChad; // later will be replaced by selector
+  useEffect(() => {
+    console.log("server list");
+  }, []);
   return (
     <StyledListServer>
       <StyledMyServerItem>
@@ -56,6 +59,9 @@ const StyledListServer = styled.div`
   padding-right: 6px;
   padding-left: 6px;
   border-right: 1px solid white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const StyledMyServerItem = styled.div`
@@ -75,6 +81,8 @@ const StyledHorizontalLine = styled.hr`
   margin: 0 auto;
 `;
 
-const StyledServerCreatorItem = styled.div``;
+const StyledServerCreatorItem = styled.div`
+  margin-top: 6px;
+`;
 
 export default DiscordServerList;

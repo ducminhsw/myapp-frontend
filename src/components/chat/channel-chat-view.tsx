@@ -1,27 +1,25 @@
 import styled from "styled-components";
 import ChatBody from "./chat-body";
 import ChatHeader from "./chat-header";
-import ChatInput from "./chat-input"
-import { useEffect, useState } from "react";
-import { io } from "socket.io-client";
+import ChatInput from "./chat-input";
+
 const StyleTest = styled.div`
-  &{
-    display:flex;
+  & {
+    display: flex;
     flex-direction: column;
     background-color: #2f3136;
     height: 100vh;
   }
-`
+`;
 
 // const socket = io("http://localhost:3000");
 
-interface User {
-  _id: string;
-  online: boolean;
-}
+// interface User {
+//   _id: string;
+//   online: boolean;
+// }
 
 const ScreenChannelChat = () => {
-
   // const [friendList, setFriendList] = useState<User[]>([]);
 
   // useEffect(() => {
@@ -35,16 +33,17 @@ const ScreenChannelChat = () => {
 
   //     if (hasIdx === -1) return;
 
-
   //   })
 
   // }, [])
 
-  return <StyleTest>
-    <ChatHeader />
-    <ChatBody />
-    <ChatInput />
-  </StyleTest>
+  return (
+    <StyleTest>
+      <ChatHeader />
+      <ChatBody />
+      <ChatInput />
+    </StyleTest>
+  );
 };
 
 export default ScreenChannelChat;

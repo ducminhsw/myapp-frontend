@@ -1,9 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import Channels from "../screens/channel/channel";
-import ChatComp from "../components/chat/channel-chat-view";
 import TabSignInAuthentication from "../components/auth/signin/sign-in";
 import TabSignUpAuthentication from "../components/auth/signup/sign-up";
+import ScreenChannelChat from "../components/chat/channel-chat-view";
+import DiscordVideoCallList from "../components/chat/channel-video-view";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -11,59 +12,21 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "channels",
-        element: (
-          <ChatComp />
-        )
-        // children: [
-        //   {
-        //     path: "@me",
-        //     element: (
-        //       <>
-        //         <div>@me</div>
-        //         <Outlet />
-        //       </>
-        //     ),
-        //     children: [
-        //       {
-        //         path: ":userId",
-        //         element: <>End Route</>,
-        //       },
-        //     ],
-        //   },
-        //   {
-        //     path: ":serverId",
-        //     element: (
-        //       <>
-        //         <div>OKE</div>
-        //         <Outlet />
-        //       </>
-        //     ),
-        //     children: [
-        //       {
-        //         path: ":channelId",
-        //         element: (
-        //           <>
-        //             <div>Last Channel</div>
-        //             <Outlet />
-        //           </>
-        //         ),
-        //       },
-        //     ],
-        //   },
-        // ],
+        element: <ScreenChannelChat />,
+        // element: <ChatScreen />,
+      },
+      {
+        path: "videos",
+        element: <DiscordVideoCallList />,
       },
       {
         path: "login",
-        element: (
-          <TabSignInAuthentication />
-        )
+        element: <TabSignInAuthentication />,
       },
       {
         path: "register",
-        element: (
-          <TabSignUpAuthentication />
-        )
-      }
+        element: <TabSignUpAuthentication />,
+      },
     ],
   },
 ]);

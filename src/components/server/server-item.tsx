@@ -21,6 +21,10 @@ const DiscordServerItem = ({
   const [isChoosen, setIsChoosen] = useState<boolean>(false);
 
   useEffect(() => {
+    console.log("bottom");
+  }, []);
+
+  useEffect(() => {
     if (nodeChoosen === serverId) {
       setIsChoosen(true);
     } else {
@@ -36,7 +40,7 @@ const DiscordServerItem = ({
     <StyledServerItemContainer onClick={onChoosingServerNode}>
       <StyledServerImage
         src={isMyServer ? GigaChad : serverImg}
-        choosen={isChoosen}
+        $choosen={isChoosen}
       />
     </StyledServerItemContainer>
   );
@@ -51,14 +55,14 @@ const StyledServerItemContainer = styled.div`
   margin-bottom: 6px;
 `;
 
-const StyledServerImage = styled.img.attrs<{ choosen: boolean; src?: string }>(
+const StyledServerImage = styled.img.attrs<{ $choosen: boolean; src?: string }>(
   (props) => ({
     src: props.src || TomHardy,
   })
 )`
   width: 48px;
   height: 48px;
-  border-radius: ${(props) => (props.choosen ? "12px" : "100%")};
+  border-radius: ${(props) => (props.$choosen ? "12px" : "100%")};
   transition: border-radius 0.2s ease-in-out;
   &:hover {
     cursor: pointer;
