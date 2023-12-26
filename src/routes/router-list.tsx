@@ -12,9 +12,7 @@ export const router = createBrowserRouter([
     path: "/",
     element: (
       <>
-        {/* <ProtectedRoute> */}
         <App />
-        {/* // </ProtectedRoute> */}
         <ToastContainer
           position="bottom-right"
           autoClose={5000}
@@ -41,9 +39,9 @@ export const router = createBrowserRouter([
           {
             path: "/channels/:idServer/:idChannel",
             element: (
-              <ProtectedRoute>
-                <ChatComp />
-              </ProtectedRoute>
+              // <ProtectedRoute>
+              <ChatComp />
+              // </ProtectedRoute>
             ),
           },
         ],
