@@ -3,8 +3,12 @@ import DiscordServerList from "./components/server/server-list-item";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { serverDataMock } from "./components/server/server-mock";
+
+import ChannelBar from "./components/channel/channel-bar";
+
 import { Toaster } from "react-hot-toast";
 import { socket } from "./socket/socket";
+
 
 function App() {
   const [nodeChoosen, setNodeChoosen] = useState<string>("");
@@ -37,6 +41,7 @@ function App() {
         setNodeChoosen={setNodeChoosen}
         dataSource={serverDataMock}
       />
+      <ChannelBar />
       <Outlet />
       <Toaster />
     </StyledDiscordPageContainer>

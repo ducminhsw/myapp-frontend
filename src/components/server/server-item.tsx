@@ -38,10 +38,12 @@ const DiscordServerItem = ({
 
   return (
     <StyledServerItemContainer onClick={onChoosingServerNode}>
+
       <StyledServerImage
         src={isMyServer ? GigaChad : serverImg}
         $choosen={isChoosen}
       />
+
     </StyledServerItemContainer>
   );
 };
@@ -60,6 +62,7 @@ const StyledServerImage = styled.img.attrs<{ $choosen: boolean; src?: string }>(
     src: props.src || TomHardy,
   })
 )`
+
   width: 48px;
   height: 48px;
   border-radius: ${(props) => (props.$choosen ? "12px" : "100%")};
