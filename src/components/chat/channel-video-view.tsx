@@ -1,14 +1,31 @@
 import styled from "styled-components";
 import DiscordVideoFrameItem from "./video-item";
+import { useEffect, useState } from "react";
+
+interface IDiscordVideoStream {
+  srcObject: string;
+  username: string;
+}
 
 const DiscordVideoCallList = () => {
+  const [streams, setStreams] = useState<IDiscordVideoStream[]>();
+
+  useEffect(() => {
+    setStreams([]);
+  }, []);
+
   return (
     <StyledVideoFrameList>
       <StyledListContainer>
-        <DiscordVideoFrameItem />
-        <DiscordVideoFrameItem />
-        <DiscordVideoFrameItem />
-        <DiscordVideoFrameItem />
+        {streams?.map((stream) => {
+          console.log(stream.username);
+          return (
+            <DiscordVideoFrameItem
+              srcObject={stream.srcObject}
+              username={stream.username}
+            />
+          );
+        })}
       </StyledListContainer>
     </StyledVideoFrameList>
   );

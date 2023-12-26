@@ -3,7 +3,6 @@ import styled from "styled-components";
 interface IDiscordVideoStream {
   srcObject: string;
   username: string;
-  userId: string;
 }
 
 const DiscordVideoFrameItem = ({

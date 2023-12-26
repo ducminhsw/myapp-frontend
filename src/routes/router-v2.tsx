@@ -4,6 +4,7 @@ import TabSignInAuthentication from "../components/auth/signin/sign-in";
 import TabSignUpAuthentication from "../components/auth/signup/sign-up";
 import ScreenChannelChat from "../components/chat/channel-chat-view";
 import DiscordVideoCallList from "../components/chat/channel-video-view";
+import ChannelBar from "../components/channel/channel-bar";
 
 export const router = createBrowserRouter([
   {
@@ -17,7 +18,13 @@ export const router = createBrowserRouter([
       },
       {
         path: "videos",
-        element: <DiscordVideoCallList />,
+        element: <ChannelBar />,
+        children: [
+          {
+            path: "videos",
+            element: <DiscordVideoCallList />,
+          },
+        ],
       },
       {
         path: "login",
