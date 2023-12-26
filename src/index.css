@@ -24,6 +24,14 @@
   -webkit-text-size-adjust: 100%;
   padding: 0;
 
+
+  --color-layout-md: rgb(43,45,49);
+  --color-layout-sm: #313338;
+  --color-layout-lg: #1e1f22;
+  --color-btn-hover: #404249;
+  --color-text-hover: #f3f9ff;
+
+  --color-text: #80848e;
 }
 
 /* width */
