@@ -4,17 +4,17 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { serverDataMock } from "./components/server/server-mock";
 
-import ChannelBar from "./components/channel/channel-bar";
-
 import { Toaster } from "react-hot-toast";
 import { socket } from "./socket/socket";
-
 
 function App() {
   const [nodeChoosen, setNodeChoosen] = useState<string>("");
 
   // socket part
-  const [_isConnect, setIsConnect] = useState<boolean>(false);
+  const [isConnect, setIsConnect] = useState<boolean>(false);
+
+  // call video part
+  const [joined, setJoined] = useState<boolean>(false);
 
   useEffect(() => {
     socket.on("connect", () => {
@@ -41,8 +41,7 @@ function App() {
         setNodeChoosen={setNodeChoosen}
         dataSource={serverDataMock}
       />
-      <ChannelBar />
-      <Outlet />
+      <Outlet context={{ userId: socket.id, joined, setJoined }} />
       <Toaster />
     </StyledDiscordPageContainer>
   );

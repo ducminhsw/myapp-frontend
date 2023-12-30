@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import "./channel-content-top.modules.css";
+import {
+  DiscordAngleDownIc,
+  DiscordAngleRightIc,
+} from "../../../assets/icons/discord-icon-channel";
 export default function ChannelContentTop() {
   const [isChatChannel, setIsChatChannel] = useState<boolean>(true);
   const [isChatVoice, setIsChatVoice] = useState<boolean>(true);
@@ -11,12 +15,11 @@ export default function ChannelContentTop() {
         <div className="nameServer ">Máy chủ của Văn</div>
         <StyledButton className="textServer">Máy chủ của Văn</StyledButton>
         <StyledChat>
-          <div className="styledChat" onClick={() => setIsChatChannel((prev) => !prev)}>
-            {isChatChannel ? (
-              <i className="fa-solid fa-angle-down"></i>
-            ) : (
-              <i className="fa-solid fa-chevron-right"></i>
-            )}
+          <div
+            className="styledChat"
+            onClick={() => setIsChatChannel((prev) => !prev)}
+          >
+            {isChatChannel ? <DiscordAngleDownIc /> : <DiscordAngleRightIc />}
             <span>KÊNH CHAT</span>
           </div>
           {isChatChannel && (
@@ -27,7 +30,10 @@ export default function ChannelContentTop() {
           )}
         </StyledChat>
         <StyledVoice>
-          <div className="styledChat" onClick={() => setIsChatVoice((prev) => !prev)}>
+          <div
+            className="styledChat"
+            onClick={() => setIsChatVoice((prev) => !prev)}
+          >
             {isChatVoice ? (
               <i className="fa-solid fa-angle-down"></i>
             ) : (
@@ -38,7 +44,7 @@ export default function ChannelContentTop() {
           {isChatVoice && (
             <div>
               <StyledButton>
-                <span># chung</span>
+                <span># Chung</span>
                 <span>+</span>
               </StyledButton>
               <StyledButton>

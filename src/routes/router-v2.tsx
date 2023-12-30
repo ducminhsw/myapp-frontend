@@ -2,30 +2,15 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import TabSignInAuthentication from "../components/auth/signin/sign-in";
 import TabSignUpAuthentication from "../components/auth/signup/sign-up";
-import ScreenChannelChat from "../components/chat/channel-chat-view";
-import DiscordVideoCallList from "../components/chat/channel-video-view";
-import ChannelBar from "../components/channel/channel-bar";
+import ScreenChannelChat from "../components/chat/channel-chat/channel-chat-view";
+import DiscordVideoCallList from "../components/chat/channel-video/channel-video-view";
+import DiscordChannelPart from "../components/channel-v2/channel-column";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />, // channels
+    element: <App />,
     children: [
-      {
-        path: "channels",
-        element: <ScreenChannelChat />,
-        // element: <ChatScreen />,
-      },
-      {
-        path: "videos",
-        element: <ChannelBar />,
-        children: [
-          {
-            path: "videos",
-            element: <DiscordVideoCallList />,
-          },
-        ],
-      },
       {
         path: "login",
         element: <TabSignInAuthentication />,
@@ -33,6 +18,20 @@ export const router = createBrowserRouter([
       {
         path: "register",
         element: <TabSignUpAuthentication />,
+      },
+      {
+        path: "channels",
+        element: <DiscordChannelPart />,
+        children: [
+          {
+            path: "chat",
+            element: <ScreenChannelChat />,
+          },
+          {
+            path: "call",
+            element: <DiscordVideoCallList />,
+          },
+        ],
       },
     ],
   },
