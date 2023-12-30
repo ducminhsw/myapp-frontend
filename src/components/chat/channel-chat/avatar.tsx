@@ -1,5 +1,15 @@
 import styled from "styled-components";
 
+const Avatar = () => {
+  return (
+    <StyleAvatar>
+      <img src="" alt="This is an avatar" />
+    </StyleAvatar>
+  );
+};
+
+export default Avatar;
+
 const StyleAvatar = styled.div`
   img {
     display: flex;
@@ -13,12 +23,3 @@ const StyleAvatar = styled.div`
     border-radius: 50%;
   }
 `;
-const Avatar = () => {
-  return (
-    <StyleAvatar>
-      <img src="" alt="This is an avatar" />
-    </StyleAvatar>
-  );
-};
-
-export default Avatar;

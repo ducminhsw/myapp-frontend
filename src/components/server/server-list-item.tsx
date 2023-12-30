@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import DiscordServerItem from "./server-item";
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { IDiscordServerItemData } from "./server-constant";
 import DiscordCreateServerIc from "./create-server-item";
 import { GigaChad } from "../../assets/images";
@@ -17,9 +17,7 @@ const DiscordServerList = ({
   setNodeChoosen,
 }: IListServerItem) => {
   const MyServerImage = GigaChad; // later will be replaced by selector
-  useEffect(() => {
-    console.log("server list");
-  }, []);
+
   return (
     <StyledListServer>
       <StyledMyServerItem>
