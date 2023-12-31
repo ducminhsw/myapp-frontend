@@ -12,7 +12,7 @@ const DiscordVideoFrameItem = ({
   const handleClickUserStream = () => {};
   return (
     <StyledVideoBlock onClick={handleClickUserStream}>
-      <StyledVideoFrame srcObject={srcObject} />
+      <StyledVideoFrame srcObject={srcObject || "none"} />
       <StyledVideoBar>{username || "Hello World"}</StyledVideoBar>
     </StyledVideoBlock>
   );

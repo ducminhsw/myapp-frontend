@@ -16,10 +16,9 @@ const ScreenChannelChat = () => {
 export default ScreenChannelChat;
 
 const StyleTest = styled.div`
-  & {
-    display: flex;
-    flex-direction: column;
-    background-color: #2f3136;
-    height: 100vh;
-  }
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #2f3136;
+  height: 100vh;
 `;
