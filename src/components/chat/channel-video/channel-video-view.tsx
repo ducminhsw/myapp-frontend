@@ -7,12 +7,29 @@ interface IDiscordVideoStream {
   username: string;
 }
 
-const DiscordVideoCallList = () => {
-  const [streams, setStreams] = useState<IDiscordVideoStream[]>();
+const MockDiscordVideoStreams = [
+  {
+    srcObject: "",
+    username: "hejfnerj",
+  },
+  {
+    srcObject: "",
+    username: "nvjfvndfnvj",
+  },
+  {
+    srcObject: "",
+    username: "njkenrjer",
+  },
+];
 
-  useEffect(() => {
-    setStreams([]);
-  }, []);
+const DiscordVideoCallList = () => {
+  const [streams, _setStreams] = useState<IDiscordVideoStream[]>(
+    MockDiscordVideoStreams
+  );
+
+  // useEffect(() => {
+  //   setStreams([]);
+  // }, []);
 
   return (
     <StyledVideoFrameList>
@@ -34,10 +51,11 @@ const DiscordVideoCallList = () => {
 export default DiscordVideoCallList;
 
 const StyledVideoFrameList = styled.div`
-  width: 60%;
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: black;
 `;
 
 const StyledListContainer = styled.div`
