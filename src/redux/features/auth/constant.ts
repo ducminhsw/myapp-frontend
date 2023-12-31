@@ -1,4 +1,4 @@
-export interface IUserCredential {
+export interface IUserBasicInfo {
   role: string;
   userId: string;
   email: string;
@@ -18,6 +18,5 @@ export interface IUserCredential {
 export interface AuthState {
   loading: boolean;
   loggedSuccess: boolean;
-  failedTimes: number;
-  userCredentials: IUserCredential | {};
+  userBasicInfo: IUserBasicInfo | Record<string, string>;
 }

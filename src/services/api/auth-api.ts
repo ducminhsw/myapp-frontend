@@ -1,7 +1,7 @@
 import axios from "axios";
 import { IPromiseAxiosReturnType } from "../constant/service-constant";
 
-const local = 'http://localhost:3000'
+const local = "http://localhost:3000";
 
 export interface ISignInRequest {
   email: string;
@@ -9,8 +9,10 @@ export interface ISignInRequest {
 }
 
 export interface ISignInResponse {
+  message: string;
+  code: number;
   data: {
-    userCredentials: {
+    userBasicInfo: {
       role: string;
       userId: string;
       email: string;
@@ -25,10 +27,8 @@ export interface ISignInResponse {
       dateOfBirth: string;
       stories: any[];
       token: string;
-    }
-  },
-  message: string
-  code: number
+    };
+  };
 }
 
 export interface ISignUpRequest extends ISignInRequest {
@@ -39,12 +39,14 @@ export interface ISignUpRequest extends ISignInRequest {
   dateOfBirth: string;
 }
 
-export interface ISignUpResponse { }
+export interface ISignUpResponse {}
 
 export const signInRequest = async (
   data: ISignInRequest
-): IPromiseAxiosReturnType<ISignInResponse> => await axios.post(`${local}/api/v1/auth/login`, data);
+): IPromiseAxiosReturnType<ISignInResponse> =>
+  await axios.post(`${local}/api/v1/auth/login`, data);
 
 export const signUpRequest = async (
   data: ISignUpRequest
-): IPromiseAxiosReturnType<ISignUpResponse> => await axios.post(`${local}/api/v1/auth/register`, data);
+): IPromiseAxiosReturnType<ISignUpResponse> =>
+  await axios.post(`${local}/api/v1/auth/register`, data);

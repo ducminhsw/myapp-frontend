@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AuthState } from "./constant";
 import { RootState } from "../../store";
-import toast from "react-hot-toast";
 
 import {
   ISignInRequest,
@@ -10,15 +9,21 @@ import {
   signInRequest,
   signUpRequest,
 } from "../../../services/api/auth-api";
+import {
+  displayErrorToast,
+  displaySuccessToast,
+} from "../../../utils/toast-creator";
 
 const initialAuthState: AuthState = {
   loading: false,
-  failedTimes: 0,
   loggedSuccess: false,
-  userCredentials: {},
+  userBasicInfo: {},
 };
 
-export const handleSignUpRequest = createAsyncThunk<ISignUpResponse | undefined, ISignUpRequest>(
+export const handleSignUpRequest = createAsyncThunk<
+  ISignUpResponse,
+  ISignUpRequest
+>(
   "auth/register",
   async ({
     email,
@@ -35,28 +40,11 @@ export const handleSignUpRequest = createAsyncThunk<ISignUpResponse | undefined,
         username,
         dateOfBirth,
       });
-
-      if (response) {
-        toast('Register successfully', {
-          style: {
-            borderRadius: '10px',
-            background: '#00FF00',
-            color: '#000',
-          },
-          duration: 1000
-        })
-      }
-
+      response && displaySuccessToast("Register Success");
       return response.data;
     } catch (error) {
-      toast('Something went wrong !', {
-        style: {
-          borderRadius: '10px',
-          background: 'red',
-          color: '#fff',
-        },
-        duration: 1500
-      })
+      displayErrorToast();
+      return undefined;
     }
   }
 );
@@ -70,28 +58,11 @@ export const handleSignInRequest = createAsyncThunk(
         password,
       });
 
-      if (response) {
-        toast('Login successfully', {
-          style: {
-            borderRadius: '10px',
-            background: '#00FF00',
-            color: '#000',
-          },
-          duration: 1500
-        })
-      }
-
+      response && displaySuccessToast("Login successfully");
       return response?.data?.data;
     } catch (error) {
-
-      toast('Something went wrong !', {
-        style: {
-          borderRadius: '10px',
-          background: 'red',
-          color: '#fff',
-        },
-        duration: 1500
-      })
+      displayErrorToast();
+      return undefined;
     }
   }
 );
@@ -102,54 +73,29 @@ export const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(handleSignUpRequest.pending, (state, _) => {
+      .addCase(handleSignInRequest.pending, (state) => {
         state.loading = true;
         state.loggedSuccess = false;
-      })
-      .addCase(handleSignUpRequest.fulfilled, (state, _) => {
-        state.failedTimes = 0;
-        state.loading = false;
-        state.loggedSuccess = true;
-      })
-      .addCase(handleSignUpRequest.rejected, (state, action) => {
-        console.log(state, action);
-        state.failedTimes = state.failedTimes++;
-        state.loading = false;
-        state.loggedSuccess = false;
-      })
-      .addCase(handleSignInRequest.pending, (state, action) => {
-        console.log(state, action);
-        state.loading = true;
-        state.loggedSuccess = false;
-        state.userCredentials = {};
+        state.userBasicInfo = {};
       })
       .addCase(handleSignInRequest.fulfilled, (state, action) => {
-        state.failedTimes = 0;
         state.loading = false;
         state.loggedSuccess = true;
-        state.userCredentials = action?.payload?.userCredentials!;
+        state.userBasicInfo = action!.payload!.userBasicInfo;
       })
       .addCase(handleSignInRequest.rejected, (state, action) => {
         console.log(state, action);
-        state.failedTimes = state.failedTimes++;
         state.loading = false;
         state.loggedSuccess = false;
-        state.userCredentials = {};
+        state.userBasicInfo = {};
       });
   },
 });
 
-export const authLoading = (state: RootState) => {
-  state.authReducer.loading
-  state.authReducer.loggedSuccess
+export const authLoading = (state: RootState) => state.authReducer.loading;
 
-  return {
-    isLoading: state.authReducer.loading,
-    success: state.authReducer.loggedSuccess
-  }
-};
-
-export const getUserInfor = (state: RootState) => state.authReducer.userCredentials;
+export const getUserInfor = (state: RootState) =>
+  state.authReducer.userBasicInfo;
 
 // Action creators are generated for each case reducer function
 export const authReducer = authSlice.reducer;
