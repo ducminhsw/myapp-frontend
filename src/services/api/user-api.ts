@@ -21,3 +21,8 @@ export const registerAccount = (
   return axios.post(`api/v1/auth/register`, data);
 };
 
+export const signInAccount = (
+  data: IGetUserInformationRequest
+): IPromiseAxiosReturnType<IGetUserInformationResponse> => {
+  return axios.post(`api/v1/auth/register`, data);
+};

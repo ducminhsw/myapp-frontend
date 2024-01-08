@@ -23,3 +23,22 @@ export const generateUrlWithParams = (
   });
   return [url, params];
 };
+
+export interface IFriend {
+  id: string;
+  displayName: string;
+  imageUrl: string;
+  online?: boolean;
+}
+
+export interface IUser {
+  user: string;
+  createAt: Date;
+}
+
+export interface IChannel {
+  channel: string;
+  createAt: Date;
+}
+
+export interface IServer {}

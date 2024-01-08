@@ -43,7 +43,7 @@ function App() {
     if (serverChoosen === "@me") {
       navigate("@me");
     } else {
-      dispatch(getChannelsOfServer(serverChoosen));
+      // dispatch(getChannelsOfServer(serverChoosen));
       navigate("channels");
     }
   }, [serverChoosen, navigate]);

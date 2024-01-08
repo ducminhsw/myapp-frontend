@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useOutletContext } from "react-router-dom";
 import DiscordChannelColumnHeader from "./channel-column-part/header";
 import DiscordChannelColumnFooter from "./channel-column-part/footer";
 import DiscordChannelColumnBody from "./channel-column-part/body";
@@ -23,10 +22,6 @@ import { IDiscordChannel } from "../../redux/features/server/constant";
 //   },
 // };
 
-interface Props {
-  channelDataSource: IDiscordChannel[];
-}
-
 const MockDiscordChannel: IDiscordChannel[] = [
   {
     id: "mockednumber1",
@@ -46,12 +41,11 @@ const MockDiscordChannel: IDiscordChannel[] = [
 ];
 
 const DiscordChannelPart = () => {
-  const { channelDataSource } = useOutletContext<Props>();
   const [choosenChannel, setChoosenChannel] = useState<IDiscordChannel>(
-    channelDataSource?.[0] ?? MockDiscordChannel[0]
+    MockDiscordChannel[0]
   );
   const [textMessage, setTextMessage] = useState<string[]>([]);
-  useEffect(() => {}, [channelDataSource]);
+  useEffect(() => {}, []);
   useEffect(() => {
     // call api => get all the channel data
     // from channel data set the message to the fe
@@ -62,11 +56,7 @@ const DiscordChannelPart = () => {
       <StyledChannelColumn>
         <DiscordChannelColumnHeader />
         <DiscordChannelColumnBody
-          channelDataSource={
-            channelDataSource && channelDataSource.length
-              ? channelDataSource
-              : MockDiscordChannel
-          }
+          channelDataSource={MockDiscordChannel}
           choosenChannel={choosenChannel}
           setChoosenChannel={setChoosenChannel}
         />

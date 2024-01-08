@@ -1,3 +1,5 @@
+import { IFriend } from "../../../services/constant/service-constant";
+
 export interface IUserBasicInfo {
   role: string;
   userId: string;
@@ -6,12 +8,11 @@ export interface IUserBasicInfo {
   firstName: string;
   lastName: string;
   avatar: string;
-  friends: any[];
+  friends: IFriend[];
   phoneNumber: string;
   underServer: string;
   headOfServer: string;
   dateOfBirth: string;
-  stories: any[];
   token: string;
 }
 

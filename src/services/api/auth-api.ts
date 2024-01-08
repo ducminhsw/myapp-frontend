@@ -1,5 +1,5 @@
 import axios from "axios";
-import { IPromiseAxiosReturnType } from "../constant/service-constant";
+import { IFriend, IPromiseAxiosReturnType } from "../constant/service-constant";
 
 const local = "http://localhost:3000";
 
@@ -20,12 +20,11 @@ export interface ISignInResponse {
       firstName: string;
       lastName: string;
       avatar: string;
-      friends: any[];
+      friends: IFriend[];
       phoneNumber: string;
       underServer: string;
       headOfServer: string;
       dateOfBirth: string;
-      stories: any[];
       token: string;
     };
   };

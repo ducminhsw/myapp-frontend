@@ -1,62 +1,75 @@
-import { Server } from "../../components/server/server-constant.ts";
 import axios from "../../utils/customize-axios.tsx";
 import {
+  IChannel,
   IDeleteRequestCreator,
   IPromiseAxiosReturnType,
+  IUser,
 } from "../constant/service-constant.ts";
 
-interface IServerShareParams {
+interface IServerCreationRequest {
   userId: string;
-}
-
-interface IServerCreationData extends IServerShareParams {
   email: string;
   verified: boolean;
   typeServer: number;
 }
 
+interface IServerCreationResponse {
+  title: string;
+  headOfServer: IUser[];
+  type: number;
+  channels: {
+    chatChannel: IChannel[];
+    voiceChannel: IChannel[];
+  };
+  participants: IUser[];
+  joinRequest: IUser[];
+  muted: IUser[];
+  banned: IUser[];
+}
+
+interface IGetServerInformationRequest {}
+
+interface IGetServerInformationResponse extends IServerCreationResponse {}
+
 interface IDeleteServerParams {}
 
 const createServer = (
-  data: IServerCreationData
-): IPromiseAxiosReturnType<Server> => axios.post(`api/v1/server/server`, data);
+  data: IServerCreationRequest
+): IPromiseAxiosReturnType<IServerCreationResponse> =>
+  axios.post(`api/v1/server/server`, data);
 
 // get infomation of the server: participants, head of server, createAt
 const getServerInformation = (
-  data: IServerCreationData
-): IPromiseAxiosReturnType<Server> => axios.post(`api/v1/server`, data);
-
-// get list of channels in side the server, and first 100msg of the first text channel
-const getChannelsOfServer = (
-  data: IServerCreationData
-): IPromiseAxiosReturnType<Server> => axios.post(`api/v1/server`, data);
+  data: IGetServerInformationRequest
+): IPromiseAxiosReturnType<IGetServerInformationResponse> =>
+  axios.post(`api/v1/server`, data);
 
 // get specific channel in the choosen server
 const getChannelInServerInfo = (
-  data: IServerCreationData
+  data: IServerCreationRequest
 ): IPromiseAxiosReturnType<Server> => axios.post(`api/v1/server`, data);
 
 // working on it
 const editServerInformation = (
-  data: IServerCreationData
+  data: IServerCreationRequest
 ): IPromiseAxiosReturnType<Server> => axios.put(`api/v1/server`, data);
 
 // some user request to join the server
 const requestJoinServer = (
-  data: IServerCreationData
+  data: IServerCreationRequest
 ): IPromiseAxiosReturnType<null> => axios.post(`api/v1/server/on`, data);
 
 // accept
 const acceptUserJoin = (
-  data: IServerCreationData
+  data: IServerCreationRequest
 ): IPromiseAxiosReturnType<null> => axios.post(`api/v1/server/accept`, data);
 
 const requestLeaveServer = (
-  data: IServerCreationData
+  data: IServerCreationRequest
 ): IPromiseAxiosReturnType<null> => axios.post(`api/v1/server/off`, data);
 
 const resignServerPosition = (
-  data: IServerCreationData
+  data: IServerCreationRequest
 ): IPromiseAxiosReturnType<null> => axios.post(`api/v1/server/resign`, data);
 
 const deleteUserInServer = (
@@ -67,7 +80,6 @@ const deleteUserInServer = (
 export {
   createServer,
   getServerInformation,
-  getChannelsOfServer,
   getChannelInServerInfo,
   editServerInformation,
   requestJoinServer,
