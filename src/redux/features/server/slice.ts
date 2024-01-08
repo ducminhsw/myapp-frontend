@@ -4,10 +4,10 @@ import { IDiscordChannel, IDiscordServer } from "./constant";
 interface IServerState {
   loading: boolean;
   serverIned: string;
-  channelsInServer: IDiscordChannel[];
-  textChannelJoined: string;
-  voiceChannelJoined: string;
   serverList: IDiscordServer[];
+  channelsInServer: IDiscordChannel[];
+  textChannelIned: string;
+  voiceChannelIned: string;
 }
 
 const initialServerState: IServerState = {
@@ -15,8 +15,8 @@ const initialServerState: IServerState = {
   serverIned: "",
   serverList: [],
   channelsInServer: [],
-  textChannelJoined: "",
-  voiceChannelJoined: "",
+  textChannelIned: "",
+  voiceChannelIned: "",
 };
 
 export const serverSlice = createSlice({
@@ -27,6 +27,8 @@ export const serverSlice = createSlice({
     builder.addCase;
   },
 });
+
+export const serverReducer = serverSlice.reducer;
 
 // create server
 export const handleCreateServer = createAsyncThunk(

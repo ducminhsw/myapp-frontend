@@ -3,6 +3,7 @@ import FooterUserInformation from "./footer-user-info";
 import {
   DiscordHeadphoneIc,
   DiscordMuteIc,
+  DiscordSettingIc,
 } from "../../../assets/icons/discord-icon-channel";
 
 const DiscordChannelColumnFooter = () => {
@@ -11,6 +12,7 @@ const DiscordChannelColumnFooter = () => {
       <FooterUserInformation />
       <DiscordMuteIc />
       <DiscordHeadphoneIc />
+      <DiscordSettingIc />
     </StyledChannelColumnFooter>
   );
 };

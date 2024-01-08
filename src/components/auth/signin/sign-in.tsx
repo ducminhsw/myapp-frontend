@@ -1,17 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { ISignInRequest } from "../../../services/api/auth-api";
-import {
-  handleSignInRequest,
-  authLoading,
-} from "../../../redux/features/auth/slice";
+import { handleSignInRequest } from "../../../redux/features/auth/slice";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  authLoading,
+  authLoggedSuccess,
+  authUserBasicInfo,
+} from "../../../redux/features/auth/selector";
+import { CompareWithStringify } from "../../../utils/utilsFunction";
 function TabSignInAuthentication() {
   const [user, setUser] = useState<Partial<ISignInRequest>>({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const Loading = useSelector(authLoading);
+  const loading = useSelector(authLoading);
+  const logged = useSelector(authLoggedSuccess);
+  const userBasicInfo = useSelector(authUserBasicInfo);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -21,6 +26,17 @@ function TabSignInAuthentication() {
     e.preventDefault();
     dispatch(handleSignInRequest(user as ISignInRequest) as any);
   };
+
+  useEffect(() => {
+    if (
+      !loading &&
+      logged &&
+      userBasicInfo &&
+      !CompareWithStringify(userBasicInfo, {})
+    ) {
+      navigate("/@me");
+    }
+  }, [loading, logged, userBasicInfo, navigate]);
 
   return (
     <StyleSignIn>
@@ -51,11 +67,7 @@ function TabSignInAuthentication() {
           </div>
           <div>
             <button type="submit">
-              {Loading.isLoading ? (
-                <div className="loader animate-spin"></div>
-              ) : (
-                "Log In"
-              )}
+              {loading ? <div className="loader animate-spin"></div> : "Log In"}
             </button>
             <p className="need-account">
               Need an account?{" "}

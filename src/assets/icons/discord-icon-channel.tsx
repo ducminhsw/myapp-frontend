@@ -12,6 +12,8 @@ export const DiscordMuteIc = () => (
 
 export const DiscordUnMuteIc = () => <i className="fa-solid fa-microphone"></i>;
 
+export const DiscordSettingIc = () => <i className="fa-solid fa-gear"></i>;
+
 export const DiscordHeadphoneIc = () => (
   <i className="fa-solid fa-headphones"></i>
 );

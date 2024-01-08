@@ -6,45 +6,47 @@ import { serverDataMock } from "./components/server/server-mock";
 
 import { Toaster } from "react-hot-toast";
 import { socket } from "./socket/socket";
+import { useSelector } from "react-redux";
+import {
+  authLoggedSuccess,
+  authUserBasicInfo,
+} from "./redux/features/auth/selector";
+import { CompareWithStringify } from "./utils/utilsFunction";
+import { useDispatch } from "react-redux";
+import { getChannelsOfServer } from "./services/api/server-api";
 
 function App() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const logged = useSelector(authLoggedSuccess);
+  const basicInfo = useSelector(authUserBasicInfo);
 
   const [serverChoosen, setServerChoosen] = useState<string>("");
 
-  // socket part
-  const [isConnect, setIsConnect] = useState<boolean>(false);
-
-  // call video part
-  const [joined, setJoined] = useState<boolean>(false);
-  const [voiceServer, setVoiceServer] = useState<string>();
-
   useEffect(() => {
-    socket.on("connect", () => {
-      console.log("Frontend connected");
-      setIsConnect(true);
-    });
+    socket.on("connect", () => {});
+
+    socket.on("disconnect", () => {});
 
     socket.on("disconnect", () => {
-      console.log("Client disconnect");
-      setIsConnect(false);
-    });
-
-    socket.on("disconnect", (reason, description) => {
-      console.log(reason, description);
       socket.emit("Client has been offline");
-      setIsConnect(false);
     });
   }, []);
 
   useEffect(() => {
-    console.log(serverChoosen);
+    if (!logged || !basicInfo || CompareWithStringify(basicInfo, {}))
+      navigate("/login");
+  }, [logged, basicInfo, navigate]);
+
+  useEffect(() => {
     if (serverChoosen === "@me") {
       navigate("@me");
     } else {
+      dispatch(getChannelsOfServer(serverChoosen));
       navigate("channels");
     }
-  }, [serverChoosen]);
+  }, [serverChoosen, navigate]);
 
   return (
     <StyledDiscordPageContainer>
@@ -53,9 +55,7 @@ function App() {
         setServerChoosen={setServerChoosen}
         dataSource={serverDataMock}
       />
-      <Outlet
-        context={{ userId: socket.id, joined, setJoined, serverChoosen }}
-      />
+      <Outlet />
       <Toaster />
     </StyledDiscordPageContainer>
   );

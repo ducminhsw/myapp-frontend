@@ -1,8 +1,43 @@
 import styled from "styled-components";
 import { MutableRefObject, useEffect, useRef } from "react";
-import { BsPlusCircleFill, BsGiftFill, BsEmojiDizzyFill } from "react-icons/bs";
-import { FaTh } from "react-icons/fa";
-import { FaArrowsToDot } from "react-icons/fa6";
+import { BsPlusCircleFill } from "react-icons/bs";
+
+const ChatInput = () => {
+  const textHeight: MutableRefObject<HTMLTextAreaElement | null> = useRef(null);
+
+  function handleResize() {
+    if (textHeight.current) {
+      textHeight.current.style.height = "auto";
+      textHeight.current.style.height = textHeight.current.scrollHeight + "px";
+    }
+  }
+
+  useEffect(() => {
+    if (textHeight.current) {
+      textHeight.current.addEventListener("input", handleResize);
+    }
+    return () => textHeight.current?.removeEventListener("input", handleResize);
+  }, []);
+
+  return (
+    <StyleChatInput>
+      <BsPlusCircleFill className="icon" />
+      <textarea
+        ref={textHeight}
+        rows={1}
+        placeholder={`Message Channel Name`}
+      />
+      {/* <section className="right_content">
+        <BsGiftFill className="icon" />
+        <FaArrowsToDot className="icon" />
+        <FaTh className="icon" />
+        <BsEmojiDizzyFill className="icon" />
+      </section> */}
+    </StyleChatInput>
+  );
+};
+
+export default ChatInput;
 
 const StyleChatInput = styled.div`
   & {
@@ -33,40 +68,3 @@ const StyleChatInput = styled.div`
     font-size: 24px;
   }
 `;
-
-const ChatInput = () => {
-  const textHeight: MutableRefObject<HTMLTextAreaElement | null> = useRef(null);
-
-  function handleResize() {
-    if (textHeight.current) {
-      textHeight.current.style.height = "auto";
-      textHeight.current.style.height = textHeight.current.scrollHeight + "px";
-    }
-  }
-
-  useEffect(() => {
-    if (textHeight.current) {
-      textHeight.current.addEventListener("input", handleResize);
-    }
-    return () => textHeight.current?.removeEventListener("input", handleResize);
-  }, []);
-
-  return (
-    <StyleChatInput>
-      <BsPlusCircleFill className="icon" />
-      <textarea
-        ref={textHeight}
-        rows={1}
-        placeholder={`Message Channel Name`}
-      />
-      <section className="right_content">
-        <BsGiftFill className="icon" />
-        <FaArrowsToDot className="icon" />
-        <FaTh className="icon" />
-        <BsEmojiDizzyFill className="icon" />
-      </section>
-    </StyleChatInput>
-  );
-};
-
-export default ChatInput;

@@ -6,17 +6,17 @@ import DiscordChannelPart from "../components/channel-v2/channel-column";
 
 export const router = createBrowserRouter([
   {
+    path: "login",
+    element: <TabSignInAuthentication />,
+  },
+  {
+    path: "register",
+    element: <TabSignUpAuthentication />,
+  },
+  {
     path: "/",
     element: <App />,
     children: [
-      {
-        path: "login",
-        element: <TabSignInAuthentication />,
-      },
-      {
-        path: "register",
-        element: <TabSignUpAuthentication />,
-      },
       {
         path: "@me",
         element: <></>,

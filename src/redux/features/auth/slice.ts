@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AuthState } from "./constant";
-import { RootState } from "../../store";
 
 import {
   ISignInRequest,
@@ -91,11 +90,6 @@ export const authSlice = createSlice({
       });
   },
 });
-
-export const authLoading = (state: RootState) => state.authReducer.loading;
-
-export const getUserInfor = (state: RootState) =>
-  state.authReducer.userBasicInfo;
 
 // Action creators are generated for each case reducer function
 export const authReducer = authSlice.reducer;

@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface IUserStoreState {}
-
 const userInitialState = {
   friends: [],
   userInfo: {},
@@ -15,3 +13,5 @@ export const userSlice = createSlice({
     builder.addCase;
   },
 });
+
+export const userReducer = userSlice.reducer;

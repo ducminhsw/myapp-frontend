@@ -2,11 +2,9 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { ISignUpRequest } from "../../../services/api/auth-api";
-import {
-  handleSignUpRequest,
-  authLoading,
-} from "../../../redux/features/auth/slice";
+import { handleSignUpRequest } from "../../../redux/features/auth/slice";
 import { useDispatch, useSelector } from "react-redux";
+import { authLoading } from "../../../redux/features/auth/selector";
 
 interface Account {
   email: string;
@@ -68,14 +66,14 @@ const TabSignUpAuthentication = () => {
   const [account, setAccount] = useState<Partial<Account>>({});
   const [errors, setErrors] = useState<Partial<Account>>({});
   const dispatch = useDispatch();
-  const Loading = useSelector(authLoading);
+  const loading = useSelector(authLoading);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!Loading.isLoading && Loading.success) {
+    if (!loading && loading) {
       navigate("/login");
     }
-  }, [Loading.success, navigate]);
+  }, [loading, navigate]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.nodeName === "DIV") {
@@ -266,7 +264,7 @@ const TabSignUpAuthentication = () => {
               </section>
             </div>
             <button type="submit">
-              {Loading.isLoading ? (
+              {loading ? (
                 <div className="loader animate-spin"></div>
               ) : (
                 "Continue"
