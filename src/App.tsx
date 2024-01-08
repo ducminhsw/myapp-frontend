@@ -11,13 +11,9 @@ import {
   authLoggedSuccess,
   authUserBasicInfo,
 } from "./redux/features/auth/selector";
-import { CompareWithStringify } from "./utils/utilsFunction";
-import { useDispatch } from "react-redux";
-import { getChannelsOfServer } from "./services/api/server-api";
 
 function App() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const logged = useSelector(authLoggedSuccess);
   const basicInfo = useSelector(authUserBasicInfo);
@@ -35,18 +31,16 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (!logged || !basicInfo || CompareWithStringify(basicInfo, {}))
-      navigate("/login");
-  }, [logged, basicInfo, navigate]);
-
-  useEffect(() => {
+    // if (!logged || !basicInfo || CompareWithStringify(basicInfo, {})) {
+    //   // navigate("/login");
+    //   navigate("/channels");
+    // }
     if (serverChoosen === "@me") {
-      navigate("@me");
+      navigate("/@me");
     } else {
-      // dispatch(getChannelsOfServer(serverChoosen));
-      navigate("channels");
+      navigate("/channels");
     }
-  }, [serverChoosen, navigate]);
+  }, [logged, basicInfo, serverChoosen, navigate]);
 
   return (
     <StyledDiscordPageContainer>

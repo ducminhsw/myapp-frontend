@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import DiscordChannelItem from "./channel-item";
+import DiscordChannelItem from "../channel-column-part/channel-item";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import ChannelsHeader from "./channel-header";
+import ChannelsHeader from "../channel-column-part/channel-header";
 import { CHANNEL_HEADER_TEXT, CHANNEL_TYPES } from "../channel-constant";
 import { IDiscordChannel } from "../../../redux/features/server/constant";
 

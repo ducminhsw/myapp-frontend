@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import DiscordChannelColumnHeader from "./channel-column-part/header";
-import DiscordChannelColumnFooter from "./channel-column-part/footer";
-import DiscordChannelColumnBody from "./channel-column-part/body";
+import DiscordChannelColumnHeader from "./layout/header";
+import DiscordChannelColumnFooter from "./layout/footer";
+import DiscordChannelColumnBody from "./layout/body";
 import { useEffect, useState } from "react";
 import { CHANNEL_TYPES } from "./channel-constant";
 import ScreenChannelChat from "../chat/channel-chat/channel-chat-view";
@@ -35,6 +35,21 @@ const MockDiscordChannel: IDiscordChannel[] = [
   },
   {
     id: "mockednumber3",
+    channelName: "General",
+    type: CHANNEL_TYPES.VOICE,
+  },
+  {
+    id: "mockednumber5",
+    channelName: "general",
+    type: CHANNEL_TYPES.TEXT,
+  },
+  {
+    id: "mockednumber6",
+    channelName: "general 2",
+    type: CHANNEL_TYPES.TEXT,
+  },
+  {
+    id: "mockednumber7",
     channelName: "General",
     type: CHANNEL_TYPES.VOICE,
   },

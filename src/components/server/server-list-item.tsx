@@ -60,6 +60,7 @@ const StyledListServer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  border: 0;
 `;
 
 const StyledMyServerItem = styled.div`

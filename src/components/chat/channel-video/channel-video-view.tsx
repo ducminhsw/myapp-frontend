@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import DiscordVideoFrameItem from "./video-item";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface IDiscordVideoStream {
   srcObject: string;
@@ -20,16 +20,24 @@ const MockDiscordVideoStreams = [
     srcObject: "",
     username: "njkenrjer",
   },
+  {
+    srcObject: "",
+    username: "hejfnerj",
+  },
+  {
+    srcObject: "",
+    username: "nvjfvndfnvj",
+  },
+  {
+    srcObject: "",
+    username: "njkenrjer",
+  },
 ];
 
 const DiscordVideoCallList = () => {
-  const [streams, _setStreams] = useState<IDiscordVideoStream[]>(
+  const [streams, setStreams] = useState<IDiscordVideoStream[]>(
     MockDiscordVideoStreams
   );
-
-  // useEffect(() => {
-  //   setStreams([]);
-  // }, []);
 
   return (
     <StyledVideoFrameList>
@@ -60,7 +68,7 @@ const StyledVideoFrameList = styled.div`
 
 const StyledListContainer = styled.div`
   width: 100%;
-  height: auto;
+  height: 350px;
   display: flex;
   justify-content: center;
   align-items: center;
