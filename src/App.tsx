@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import DiscordServerList from "./components/server/server-list-item";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -8,13 +8,16 @@ import { Toaster } from "react-hot-toast";
 import { socket } from "./socket/socket";
 
 function App() {
-  const [nodeChoosen, setNodeChoosen] = useState<string>("");
+  const navigate = useNavigate();
+
+  const [serverChoosen, setServerChoosen] = useState<string>("");
 
   // socket part
   const [isConnect, setIsConnect] = useState<boolean>(false);
 
   // call video part
   const [joined, setJoined] = useState<boolean>(false);
+  const [voiceServer, setVoiceServer] = useState<string>();
 
   useEffect(() => {
     socket.on("connect", () => {
@@ -32,16 +35,27 @@ function App() {
       socket.emit("Client has been offline");
       setIsConnect(false);
     });
-  });
+  }, []);
+
+  useEffect(() => {
+    console.log(serverChoosen);
+    if (serverChoosen === "@me") {
+      navigate("@me");
+    } else {
+      navigate("channels");
+    }
+  }, [serverChoosen]);
 
   return (
     <StyledDiscordPageContainer>
       <DiscordServerList
-        nodeChoosen={nodeChoosen}
-        setNodeChoosen={setNodeChoosen}
+        serverChoosen={serverChoosen}
+        setServerChoosen={setServerChoosen}
         dataSource={serverDataMock}
       />
-      <Outlet context={{ userId: socket.id, joined, setJoined }} />
+      <Outlet
+        context={{ userId: socket.id, joined, setJoined, serverChoosen }}
+      />
       <Toaster />
     </StyledDiscordPageContainer>
   );

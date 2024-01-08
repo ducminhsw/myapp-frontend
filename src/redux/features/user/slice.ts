@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const userInitialState = {};
+interface IUserStoreState {}
+
+const userInitialState = {
+  friends: [],
+  userInfo: {},
+};
 
 export const userSlice = createSlice({
   initialState: userInitialState,

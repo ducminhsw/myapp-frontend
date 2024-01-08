@@ -1,11 +1,13 @@
 import styled from "styled-components";
-import { Outlet, useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 import DiscordChannelColumnHeader from "./channel-column-part/header";
 import DiscordChannelColumnFooter from "./channel-column-part/footer";
-import DiscordChannelColumnBody, {
-  IDiscordChannel,
-} from "./channel-column-part/body";
-import { useEffect } from "react";
+import DiscordChannelColumnBody from "./channel-column-part/body";
+import { useEffect, useState } from "react";
+import { CHANNEL_TYPES } from "./channel-constant";
+import ScreenChannelChat from "../chat/channel-chat/channel-chat-view";
+import DiscordVideoCallList from "../chat/channel-video/channel-video-view";
+import { IDiscordChannel } from "../../redux/features/server/constant";
 
 // const constrains = {
 //   audio: false,
@@ -27,43 +29,67 @@ interface Props {
 
 const MockDiscordChannel: IDiscordChannel[] = [
   {
-    channelId: "1121",
-    channelName: "heoaaaaaaofekf",
+    id: "mockednumber1",
+    channelName: "general",
+    type: CHANNEL_TYPES.TEXT,
   },
   {
-    channelId: "1131",
-    channelName: "heodsdsdasdekf",
+    id: "mockednumber2",
+    channelName: "general 2",
+    type: CHANNEL_TYPES.TEXT,
   },
   {
-    channelId: "1113",
-    channelName: "heoasdasdofekf",
+    id: "mockednumber3",
+    channelName: "General",
+    type: CHANNEL_TYPES.VOICE,
   },
 ];
 
 const DiscordChannelPart = () => {
   const { channelDataSource } = useOutletContext<Props>();
+  const [choosenChannel, setChoosenChannel] = useState<IDiscordChannel>(
+    channelDataSource?.[0] ?? MockDiscordChannel[0]
+  );
+  const [textMessage, setTextMessage] = useState<string[]>([]);
   useEffect(() => {}, [channelDataSource]);
+  useEffect(() => {
+    // call api => get all the channel data
+    // from channel data set the message to the fe
+    setTextMessage([""]);
+  }, [choosenChannel]);
   return (
     <StyledDiscordChannelView>
       <StyledChannelColumn>
         <DiscordChannelColumnHeader />
         <DiscordChannelColumnBody
           channelDataSource={
-            channelDataSource ? channelDataSource : MockDiscordChannel
+            channelDataSource && channelDataSource.length
+              ? channelDataSource
+              : MockDiscordChannel
           }
+          choosenChannel={choosenChannel}
+          setChoosenChannel={setChoosenChannel}
         />
         <DiscordChannelColumnFooter />
       </StyledChannelColumn>
-      <Outlet />
+      {choosenChannel?.type === CHANNEL_TYPES.TEXT ? (
+        <ScreenChannelChat
+          choosenChannel={choosenChannel}
+          textMessage={textMessage}
+        />
+      ) : (
+        <DiscordVideoCallList />
+      )}
     </StyledDiscordChannelView>
   );
 };
+
 export default DiscordChannelPart;
 
 const StyledDiscordChannelView = styled.div`
   width: 100%;
   display: flex;
-  background: white;
+  background: #2b2d31;
 `;
 
 const StyledChannelColumn = styled.div`

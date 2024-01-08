@@ -8,6 +8,33 @@ import {
   BsImageFill,
   BsQuestionCircleFill,
 } from "react-icons/bs";
+import { IDiscordChannel } from "../../../redux/features/server/constant";
+
+interface IChatHeader {
+  choosenChannel: IDiscordChannel;
+}
+
+const ChatHeader = ({ choosenChannel }: IChatHeader) => {
+  return (
+    <StyleHeader>
+      <div>{choosenChannel.channelName}</div>
+      <div className="content_right">
+        <BsThreadsFill />
+        <BsBellFill />
+        <BsPinFill />
+        <BsPeopleFill style={{ fontSize: "24px" }} />
+        <div className="search">
+          <input placeholder="Search" />
+          <BsSearch className="lookup" />
+        </div>
+        <BsImageFill />
+        <BsQuestionCircleFill />
+      </div>
+    </StyleHeader>
+  );
+};
+
+export default ChatHeader;
 
 const StyleHeader = styled.div`
   & {
@@ -46,26 +73,3 @@ const StyleHeader = styled.div`
     width: 200px;
   }
 `;
-// fas fa-bell
-
-const ChatHeader = () => {
-  return (
-    <StyleHeader>
-      <div># Name Channel</div>
-      <div className="content_right">
-        <BsThreadsFill />
-        <BsBellFill />
-        <BsPinFill />
-        <BsPeopleFill style={{ fontSize: "24px" }} />
-        <div className="search">
-          <input placeholder="Search" />
-          <BsSearch className="lookup" />
-        </div>
-        <BsImageFill />
-        <BsQuestionCircleFill />
-      </div>
-    </StyleHeader>
-  );
-};
-
-export default ChatHeader;

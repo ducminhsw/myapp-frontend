@@ -7,14 +7,14 @@ import { GigaChad } from "../../assets/images";
 
 interface IListServerItem {
   dataSource: IDiscordServerItemData[];
-  nodeChoosen: string;
-  setNodeChoosen: Dispatch<SetStateAction<string>>;
+  serverChoosen: string;
+  setServerChoosen: Dispatch<SetStateAction<string>>;
 }
 
 const DiscordServerList = ({
   dataSource,
-  nodeChoosen,
-  setNodeChoosen,
+  serverChoosen,
+  setServerChoosen,
 }: IListServerItem) => {
   const MyServerImage = GigaChad; // later will be replaced by selector
 
@@ -23,10 +23,10 @@ const DiscordServerList = ({
       <StyledMyServerItem>
         <DiscordServerItem
           isMyServer={true}
-          nodeChoosen={nodeChoosen}
+          nodeChoosen={serverChoosen}
           serverId={"@me"} // get from store
           serverImg={MyServerImage}
-          handleChangeNodeServer={setNodeChoosen}
+          handleChangeNodeServer={setServerChoosen}
         />
         <StyledHorizontalLine />
       </StyledMyServerItem>
@@ -36,10 +36,10 @@ const DiscordServerList = ({
             <DiscordServerItem
               key={index}
               isMyServer={false}
-              nodeChoosen={nodeChoosen}
+              nodeChoosen={serverChoosen}
               serverId={data.serverId}
               serverImg={data.serverImg}
-              handleChangeNodeServer={setNodeChoosen}
+              handleChangeNodeServer={setServerChoosen}
             />
           );
         })}

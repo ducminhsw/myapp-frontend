@@ -2,12 +2,18 @@ import styled from "styled-components";
 import ChatBody from "./chat-body";
 import ChatHeader from "./chat-header";
 import ChatInput from "./chat-input";
+import { IDiscordChannel } from "../../../redux/features/server/constant";
 
-const ScreenChannelChat = () => {
+interface Props {
+  textMessage: string[];
+  choosenChannel: IDiscordChannel;
+}
+
+const ScreenChannelChat = ({ textMessage, choosenChannel }: Props) => {
   return (
     <StyleTest>
-      <ChatHeader />
-      <ChatBody />
+      <ChatHeader choosenChannel={choosenChannel} />
+      <ChatBody textMessage={textMessage} />
       <ChatInput />
     </StyleTest>
   );

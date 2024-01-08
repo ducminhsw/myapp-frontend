@@ -1,9 +1,13 @@
 import styled from "styled-components";
 
-const Avatar = () => {
+interface Props {
+  source: string;
+}
+
+const Avatar = ({ source }: Props) => {
   return (
     <StyleAvatar>
-      <img src="" alt="This is an avatar" />
+      <img src={source} alt="This is an avatar" />
     </StyleAvatar>
   );
 };
@@ -15,8 +19,8 @@ const StyleAvatar = styled.div`
     display: flex;
     justify-content: center;
     algign-items: center;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     margin: 5px;
     max-width: 50px;
     background-color: black;

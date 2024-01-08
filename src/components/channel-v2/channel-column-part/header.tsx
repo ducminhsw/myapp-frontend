@@ -15,7 +15,7 @@ const DiscordChannelColumnHeader = () => {
   return (
     <StyledChannelColumnHeader>
       <StyledWrapper>
-        <StyledServerName>Server's Name</StyledServerName>
+        <StyledServerName>{"Server's Name"}</StyledServerName>
         <StyledServerOptions onClick={handleClickOptions}>
           {isClick ? <DiscordXMark /> : <DiscordAngleDownIc />}
         </StyledServerOptions>

@@ -3,38 +3,21 @@ import { IDiscordChannel, IDiscordServer } from "./constant";
 
 interface IServerState {
   loading: boolean;
-  channelFromNowServer: IDiscordChannel[];
-  servers: IDiscordServer[];
-  nowChannel: IDiscordChannel;
-  error: {
-    addChannel: string;
-    addServer: string;
-    deleteChannel: string;
-    deleteServer: string;
-  };
+  serverIned: string;
+  channelsInServer: IDiscordChannel[];
+  textChannelJoined: string;
+  voiceChannelJoined: string;
+  serverList: IDiscordServer[];
 }
 
 const initialServerState: IServerState = {
   loading: false,
-  channelFromNowServer: [],
-  servers: [],
-  nowChannel: {
-    id: "",
-    channelName: "",
-    type: 0,
-  },
-  error: {
-    addChannel: "",
-    addServer: "",
-    deleteChannel: "",
-    deleteServer: "",
-  },
+  serverIned: "",
+  serverList: [],
+  channelsInServer: [],
+  textChannelJoined: "",
+  voiceChannelJoined: "",
 };
-
-export const handleCreateServer = createAsyncThunk(
-  "server/create",
-  async () => {}
-);
 
 export const serverSlice = createSlice({
   initialState: initialServerState,
@@ -44,3 +27,51 @@ export const serverSlice = createSlice({
     builder.addCase;
   },
 });
+
+// create server
+export const handleCreateServer = createAsyncThunk(
+  "server/create-server",
+  async () => {}
+);
+
+// create invitation
+export const handleCreateInvitationToServer = createAsyncThunk(
+  "server/create-invitation",
+  async () => {}
+);
+
+// enter server with invitation
+export const handleEnterServerWithInvitation = createAsyncThunk(
+  "server/enter-server-invitation",
+  async () => {}
+);
+
+// get server info
+export const handleGetServerInformation = createAsyncThunk(
+  "server/get-server-information",
+  async () => {}
+);
+
+// request to join server
+export const handleRequestToJoinServer = createAsyncThunk(
+  "server/request-join-server",
+  async () => {}
+);
+
+// accept/decline user to join server
+export const handleAnswerJoinServerRequest = createAsyncThunk(
+  "server/accept-join-request",
+  async () => {}
+);
+
+// user leave server
+export const handleLeaveServer = createAsyncThunk(
+  "server/accept-join-request",
+  async () => {}
+);
+
+// ban user from server
+export const handleBanUserFromServer = createAsyncThunk(
+  "server/accept-join-request",
+  async () => {}
+);
